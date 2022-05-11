@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <AppHeader />
       <Main>
-        <BurgerIngredients />
+        <BurgerIngredients burgersData={burgersData} />
         <BugerConstructor burgersData={burgersData} />
       </Main>
     </div>

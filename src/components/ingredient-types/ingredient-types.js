@@ -2,6 +2,7 @@ import React from "react";
 import ingredientTypesStyles from "./ingredient-types.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { ingredientPropTypes } from "../../utils/constants";
 export default function IngredientTypes(props) {
   const burgersData = props.burgersData;
   const ingredientsArray = burgersData.filter(
@@ -38,5 +39,5 @@ export default function IngredientTypes(props) {
 }
 IngredientTypes.propTypes = {
   type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
-  burgersData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
 };

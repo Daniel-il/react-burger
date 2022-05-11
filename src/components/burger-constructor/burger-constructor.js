@@ -7,6 +7,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { ingredientPropTypes } from "../../utils/constants";
 
 export default function BugerConstructor(props) {
   const burgersData = props.burgersData;
@@ -24,9 +25,9 @@ export default function BugerConstructor(props) {
         thumbnail={bun.image}
       />
       <ul className={`${constructorStyles.list}`}>
-        {mainIngredients.map((ingredient) => {
+        {mainIngredients.map((ingredient, index) => {
           return (
-            <React.Fragment key={ingredient._id}>
+            <React.Fragment key={index}>
               <li className={`${constructorStyles.item}`}>
                 <DragIcon type="primary" />
                 <ConstructorElement
@@ -59,5 +60,10 @@ export default function BugerConstructor(props) {
   );
 }
 BugerConstructor.propTypes = {
-  burgersData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
 };
+ConstructorElement.propTypes = {
+  text: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+}
