@@ -4,7 +4,20 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientTypes from "../ingredient-types/ingredient-types";
 import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/constants";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { Modal } from "../modal/modal";
 function BurgerIngredients(props) {
+  const [ingredientInModal, setIngredientInModal] = React.useState(null);
+
+  const closeIngredientModal = () => {
+    setIngredientInModal(null)
+  };
+  const handleEscKeydown = (e) => {
+      e.key === "Escape" && closeIngredientModal();
+  }
+  const handleIngredientClick = (cardData) => {
+    setIngredientInModal(cardData)
+  }
   const [current, setCurrent] = React.useState("one");
   return (
     <section className={ingredientStyles.container}>
@@ -29,18 +42,26 @@ function BurgerIngredients(props) {
         <IngredientTypes
           type="bun"
           burgersData={props.burgersData}
+          onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
         <h2 className={`text text_type_main-medium mt-10 mb-6`}>Соусы</h2>
         <IngredientTypes
           type="sauce"
           burgersData={props.burgersData}
+          onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
         <h2 className={`text text_type_main-medium mt-10 mb-6`}>Начинки</h2>
         <IngredientTypes
           type="main"
           burgersData={props.burgersData}
+          onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
       </div>
+      {ingredientInModal !== null && (
+      <Modal onOverlayClick={closeIngredientModal} onEscKeydown={handleEscKeydown}>
+        <IngredientDetails onClick={closeIngredientModal} ingredientData={ingredientInModal}/>
+      </Modal>
+    )}
     </section>
   );
 }
