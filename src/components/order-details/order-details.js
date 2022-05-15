@@ -1,6 +1,7 @@
 import orderStyles from "./order-details.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import doneIcon from "../../img/done.png";
+import doneIcon from "../../images/done.png";
+import PropTypes from 'prop-types'
 function OrderDetails(props) {
   return (
     <>
@@ -24,6 +25,10 @@ function OrderDetails(props) {
       </p>
     </>
   );
+}
+
+OrderDetails.propTypes = {
+    onClick: PropTypes.func.isRequired
 }
 
 export { OrderDetails };
