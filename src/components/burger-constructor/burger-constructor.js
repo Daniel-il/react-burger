@@ -9,10 +9,9 @@ import {
 import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/constants";
 
-export default function BugerConstructor(props) {
-  const burgersData = props.burgersData;
-  const bun = burgersData.find((ingredient) => ingredient.type === "bun");
-  const mainIngredients = burgersData.filter(
+export default function BurgerConstructor(props) {
+  const buns = props.burgersData.filter((ingredient) => ingredient.type === "bun");
+  const mainIngredients = props.burgersData.filter(
     (ingredient) => ingredient.type !== "bun"
   );
   return (
@@ -20,9 +19,9 @@ export default function BugerConstructor(props) {
       <ConstructorElement
         type="top"
         isLocked={true}
-        text={`${bun.name} (верх)`}
-        price={bun.price}
-        thumbnail={bun.image}
+        text={`${buns[0].name} (верх)`}
+        price={buns[0].price}
+        thumbnail={buns[0].image}
       />
       <ul className={`${constructorStyles.list}`}>
         {mainIngredients.map((ingredient, index) => {
@@ -43,24 +42,25 @@ export default function BugerConstructor(props) {
       <ConstructorElement
         type="bottom"
         isLocked={true}
-        text={`${bun.name} (низ)`}
-        price={bun.price}
-        thumbnail={bun.image}
+        text={`${buns[0].name} (низ)`}
+        price={buns[0].price}
+        thumbnail={buns[0].image}
       />
       <article className={`${constructorStyles.info} mt-6`}>
         <div className={`${constructorStyles.price} mr-10`}>
           <p className="text text_type_digits-medium mr-2">12121</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={props.openModal}>
           Оформить заказ
         </Button>
       </article>
     </section>
   );
 }
-BugerConstructor.propTypes = {
+BurgerConstructor.propTypes = {
   burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+  openModal: PropTypes.func
 };
 ConstructorElement.propTypes = {
   text: PropTypes.string.isRequired,

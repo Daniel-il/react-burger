@@ -13,7 +13,7 @@ export default function IngredientTypes(props) {
       {ingredientsArray.map((ingredient) => {
         return (
           <React.Fragment key={ingredient._id}>
-            <li className={ingredientTypesStyles.item}>
+            <li className={ingredientTypesStyles.item} onClick={() => props.onIngredientClick(ingredient)}>
               <img
                 className={ingredientTypesStyles.image}
                 src={ingredient.image}
@@ -40,4 +40,5 @@ export default function IngredientTypes(props) {
 IngredientTypes.propTypes = {
   type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
   burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+  onIngredientClick: PropTypes.func.isRequired
 };
