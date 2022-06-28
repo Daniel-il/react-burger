@@ -9,7 +9,7 @@ function OrderDetails(props) {
         <CloseIcon type="primary" onClick={props.onClick} />
       </div>
       <p className={`text text_type_digits-large ${orderStyles.digits}`}>
-        12032
+        {props.orderNumber}
       </p>
       <p className={`text text_type_main-medium mb-15 ${orderStyles.text}`}>
         идентификатор заказа
@@ -28,7 +28,8 @@ function OrderDetails(props) {
 }
 
 OrderDetails.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    orderNumber: PropTypes.number.isRequired,
 }
 
 export { OrderDetails };

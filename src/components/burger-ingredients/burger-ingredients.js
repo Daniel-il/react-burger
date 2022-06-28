@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/constants";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
-function BurgerIngredients(props) {
-  const [ingredientInModal, setIngredientInModal] = React.useState(null);
 
+function BurgerIngredients() {
+  const [ingredientInModal, setIngredientInModal] = React.useState(null);
   const closeIngredientModal = () => {
     setIngredientInModal(null)
   };
@@ -41,19 +41,16 @@ function BurgerIngredients(props) {
         <h2 className={`text text_type_main-medium mb-6`}>Булки</h2>
         <IngredientTypes
           type="bun"
-          burgersData={props.burgersData}
           onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
         <h2 className={`text text_type_main-medium mt-10 mb-6`}>Соусы</h2>
         <IngredientTypes
           type="sauce"
-          burgersData={props.burgersData}
           onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
         <h2 className={`text text_type_main-medium mt-10 mb-6`}>Начинки</h2>
         <IngredientTypes
           type="main"
-          burgersData={props.burgersData}
           onIngredientClick={handleIngredientClick}
         ></IngredientTypes>
       </div>
@@ -67,6 +64,3 @@ function BurgerIngredients(props) {
 }
 export default BurgerIngredients;
 
-BurgerIngredients.propTypes = {
-  burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired
-}

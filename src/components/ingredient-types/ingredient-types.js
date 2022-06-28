@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import ingredientTypesStyles from "./ingredient-types.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/constants";
+import { IngredientsContext } from "../../services/ingredientsContext";
 export default function IngredientTypes(props) {
-  const burgersData = props.burgersData;
-  const ingredientsArray = burgersData.filter(
+  const { data} = useContext(IngredientsContext)
+  const ingredientsArray = data.filter(
     (ingredient) => ingredient.type === props.type
   );
   return (
@@ -39,6 +40,5 @@ export default function IngredientTypes(props) {
 }
 IngredientTypes.propTypes = {
   type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
-  burgersData: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
   onIngredientClick: PropTypes.func.isRequired
 };
