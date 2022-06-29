@@ -2,8 +2,6 @@ import React from "react";
 import ingredientStyles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientTypes from "../ingredient-types/ingredient-types";
-import PropTypes from "prop-types";
-import { ingredientPropTypes } from "../../utils/constants";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
 

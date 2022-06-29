@@ -7,15 +7,14 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { ingredientPropTypes, ingredientsUrl } from "../../utils/constants";
 import { IngredientsContext } from "../../services/ingredientsContext";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 export default function BurgerConstructor() {
-  let ingredientsIds;
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
   const [orderNumber, setOrderNumber] = React.useState(0);
   const getIds = () => {
+    let ingredientsIds;
     ingredientsIds = mainIngredients.map((ingredient) => ingredient._id);
     const bunId = buns[0]._id;
     ingredientsIds.push(bunId);
@@ -64,7 +63,7 @@ export default function BurgerConstructor() {
     const bunCost = buns[0].price * 2;
     const totalCost = bunCost + initialCost;
     setTotalPrice(totalCost);
-  });
+  }, [buns, mainIngredients]);
 
   return (
     <>
@@ -117,9 +116,7 @@ export default function BurgerConstructor() {
     </>
   );
 }
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func,
-};
+
 ConstructorElement.propTypes = {
   text: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
