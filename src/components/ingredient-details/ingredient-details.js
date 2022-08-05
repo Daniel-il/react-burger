@@ -1,7 +1,7 @@
 import ingredientStyles from "./ingredient-details.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { ingredientPropTypes } from "../../utils/constants";
+
 function IngredientDetails(props) {
   return (
     <>
@@ -76,7 +76,6 @@ function IngredientDetails(props) {
 }
 
 IngredientDetails.propTypes = {
-    ingredientData: ingredientPropTypes.isRequired,
     onClick: PropTypes.func.isRequired
 }
 export { IngredientDetails };

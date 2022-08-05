@@ -1,36 +1,41 @@
-import React, {useContext} from "react";
+import React from "react";
 import ingredientTypesStyles from "./ingredient-types.module.css";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { IngredientsContext } from "../../services/ingredientsContext";
-export default function IngredientTypes(props) {
-  const { data} = useContext(IngredientsContext)
-  const ingredientsArray = data.filter(
-    (ingredient) => ingredient.type === props.type
+import { useSelector} from "react-redux";
+import DraggableFilling from "../draggable-filling/draggable-filling";
+
+export default function IngredientTypes({ ingredientsRef, type }) {
+  const { ingredients } = useSelector((state) => state.ingredients);
+  const { bun, filling } = useSelector(
+    (store) => store.burgerConstructorIngredients.constructorIngredients
   );
+
+  const ingredientsArray = ingredients.filter(
+    (ingredient) => ingredient.type === type
+  );
+
+  function startCount() {
+    const amount = {};
+    if (bun) {
+      amount[bun._id] = 2;
+    }
+    if (filling) {
+      filling.map((item) => {
+        if (amount[item._id] === undefined) {
+          amount[item._id] = 0;
+        }
+        return (amount[item._id] += 1);
+      });
+    }
+    return amount;
+  }
+  const allAmount = startCount();
   return (
-    <ul className={ingredientTypesStyles.list}>
+    <ul className={ingredientTypesStyles.list} ref={ingredientsRef}>
       {ingredientsArray.map((ingredient) => {
         return (
           <React.Fragment key={ingredient._id}>
-            <li className={ingredientTypesStyles.item} onClick={() => props.onIngredientClick(ingredient)}>
-              <img
-                className={ingredientTypesStyles.image}
-                src={ingredient.image}
-                alt={ingredient.name}
-              ></img>
-              <div className={`${ingredientTypesStyles.cost} mb-1`}>
-                <p className="text text_type_digits-default mr-2">
-                  {ingredient.price}
-                </p>
-                <CurrencyIcon type="primary" />
-              </div>
-              <p
-                className={`text text_type_main-default ${ingredientTypesStyles.text}`}
-              >
-                {ingredient.name}
-              </p>
-            </li>
+            <DraggableFilling ingredient={ingredient} counter={allAmount[ingredient._id]} />
           </React.Fragment>
         );
       })}
@@ -39,5 +44,4 @@ export default function IngredientTypes(props) {
 }
 IngredientTypes.propTypes = {
   type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
-  onIngredientClick: PropTypes.func.isRequired
 };

@@ -1,0 +1,22 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 24px 0 16px;
+    align-items: center;
+    max-width: 272px;
+    width: 100%;
+    position: relative;
+  }
+  .item:nth-of-type(2n) {
+    margin: 0;
+  }
+  .image {
+    display: flex;
+  }
+  .cost {
+    display: flex;
+  }
+  .text {
+    text-align: center;
+  }
+  

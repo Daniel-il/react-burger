@@ -16,7 +16,7 @@
   gap: 10px;
   max-width: 600px;
   width: 100%;
-  max-height: 536px;
+  height: 536px;
   overflow-y: scroll;
 }
 .item {

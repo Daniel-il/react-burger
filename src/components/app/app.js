@@ -5,38 +5,32 @@ import Main from "../main/main";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { IngredientsContext } from "../../services/ingredientsContext";
-import { ingredientsUrl } from "../../utils/constants";
+import { getIngredients } from "../../services/actions/burger-ingredients";
+import { getConstructorIngredients } from "../../services/actions/burger-constructor";
+import {useDispatch, useSelector } from 'react-redux';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const dispatch = useDispatch();
    useEffect(() => {
-    const getData = () => {
-      fetch(ingredientsUrl)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Ошибка ${res.status}`);
-          }
-        })
-        .then((res) => {
-          setData(res.data);
-        })
-        .catch((err) => console.log(err));
-    };
-    getData();
-  }, []);
+    dispatch(getIngredients())
+  }, [dispatch]);
+  const {ingredients} = useSelector((state) => state.ingredients)
   return (
     <div className="App">
       <AppHeader />
-      {data && <Main>
-          <IngredientsContext.Provider value={{ data, setData }}>
+      <DndProvider backend={HTML5Backend}>
+      <Main>
+      {ingredients && 
+            <>
             <BurgerIngredients   />
-            <BurgerConstructor  />
-          </IngredientsContext.Provider>
-        </Main>} 
-        
-      
+            <BurgerConstructor/>
+            </>
+        }
+     
+      </Main>
+      </DndProvider>
     </div>
   );
 }
