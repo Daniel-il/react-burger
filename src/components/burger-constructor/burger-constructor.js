@@ -56,9 +56,7 @@ export default function BurgerConstructor() {
     setIsOrderDetailsOpened(false);
   };
 
-  const handleEscKeydown = (e) => {
-    e.key === "Escape" && closeOrderModal();
-  };
+  
   
  
   return (
@@ -102,7 +100,7 @@ export default function BurgerConstructor() {
         </article>
       </section>
       {isOrderDetailsOpened && (
-        <Modal onOverlayClick={closeOrderModal} onEscKeydown={handleEscKeydown}>
+        <Modal onClose={closeOrderModal} >
           <OrderDetails onClick={closeOrderModal} orderNumber={orderNumber} />
         </Modal>
       )}

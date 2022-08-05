@@ -1,4 +1,5 @@
-import { orderUrl } from "../../utils/constants";
+import { baseUrl } from "../../utils/constants";
+import { checkResponse } from "../../utils/utils";
 
 const POST_INGREDIENTS_SUCCESS = "POST_INGREDIENTS_SUCCESS";
 const POST_INGREDIENTS_FAILED = "POST_INGREDIENTS_FAILED";
@@ -9,7 +10,7 @@ export const postIngredientsToServer = (ids) => {
     dispatch({
       type: POST_INGREDIENTS_REQUEST,
     });
-    fetch(orderUrl, {
+    fetch(`${baseUrl}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,24 +19,20 @@ export const postIngredientsToServer = (ids) => {
         ingredients: ids,
       }),
     })
+      .then(checkResponse)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        else {
-            dispatch({
-                type: POST_INGREDIENTS_FAILED
-            })
-            return Promise.reject(`Ошибка ${res.status}`);
-          }
+        dispatch({
+          type: POST_INGREDIENTS_SUCCESS,
+          orderNumber: res.order.number,
+        });
       })
-      .then((res) => {
-          dispatch({
-            type: POST_INGREDIENTS_SUCCESS,
-            orderNumber: res.order.number,
-          });
+      .catch((err) => {
+        dispatch({
+            type: POST_INGREDIENTS_FAILED,
+        })
+        console.log(err)
       })
-      .catch((err) => console.log(err));
+      ;
   };
 };
 export {

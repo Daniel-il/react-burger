@@ -11,7 +11,16 @@
   z-index: 10;
   position: relative;
 }
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px auto 16px;
+  max-width: 640px;
+  width: 100%;
+}
 .container {
+  flex-direction: column;
   display: flex;
   position: fixed;
   top: 0;

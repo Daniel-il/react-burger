@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import {useEffect} from "react";
 import "./app";
 import AppHeader from "../app-header/app-header";
 import Main from "../main/main";
@@ -16,7 +16,7 @@ function App() {
   }, [dispatch]);
   const {ingredients} = useSelector((state) => state.ingredients)
   return (
-    <div className="App">
+    <div>
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
       <Main>

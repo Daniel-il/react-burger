@@ -58,7 +58,7 @@ export const burgerConstructorReducer = (
       };
     }
     default: {
-      return { ...state };
+      return state ;
     }
   }
 };

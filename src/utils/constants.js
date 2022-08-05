@@ -13,6 +13,6 @@ const ingredientPropTypes = PropTypes.shape({
   image_large: PropTypes.string.isRequired,
   __v: PropTypes.number.isRequired,
 });
-const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients";
-const orderUrl = "https://norma.nomoreparties.space/api/orders";
-export { ingredientPropTypes, ingredientsUrl, orderUrl };
+const baseUrl = 'https://norma.nomoreparties.space/api'
+
+export { ingredientPropTypes, baseUrl };

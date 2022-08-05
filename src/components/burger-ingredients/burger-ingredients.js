@@ -11,9 +11,6 @@ import {
 import { Modal } from "../modal/modal";
 
 function BurgerIngredients() {
-  const handleEscKeydown = (e) => {
-    e.key === "Escape" && dispatch(closeIngredientModal());
-  };
   const dispatch = useDispatch();
   const { ingredientInModal } = useSelector((store) => store.ingredientDetails);
   const [current, setCurrent] = useState("one");
@@ -63,10 +60,10 @@ function BurgerIngredients() {
       </div>
       {ingredientInModal && (
         <Modal
-          onOverlayClick={() => {
+          onClose={() => {
             dispatch(closeIngredientModal());
           }}
-          onEscKeydown={handleEscKeydown}
+          title={'Детали ингредиента'}
         >
           <IngredientDetails
             onClick={() => {
