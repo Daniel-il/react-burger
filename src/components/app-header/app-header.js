@@ -9,6 +9,7 @@ import {
 export default function AppHeader() {
   return (
     <header className={headerStyles.header}>
+      <article className={headerStyles.header__wrapper}>
       <nav className={headerStyles.header__navigation}>
         <div className={headerStyles.header__item}>
           <BurgerIcon type="primary" />
@@ -32,7 +33,7 @@ export default function AppHeader() {
         </div>
       </nav>
       <Logo />
-      <div className={headerStyles.header__item}>
+      <div className={headerStyles.header__profile}>
         <ProfileIcon type="secondary" />
         <a
           href="#"
@@ -42,6 +43,7 @@ export default function AppHeader() {
           Личный кабинет
         </a>
       </div>
+      </article>
     </header>
   );
 }
