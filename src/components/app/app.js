@@ -10,8 +10,9 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {LoginPage} from '../pages/login';
-import {RegisterPage} from '../pages/register'
-import {ForgotPasswordPage} from '../pages/forgot-password'
+import {RegisterPage} from '../pages/register';
+import {ForgotPasswordPage} from '../pages/forgot-password';
+import {ResetPasswordPage} from '../pages/reset-password';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path='/forgot-password' exact={true}>
             <ForgotPasswordPage />
+          </Route>
+          <Route path='/reset-password' exact={true}>
+            <ResetPasswordPage />
           </Route>
         </Switch>
         </Router>

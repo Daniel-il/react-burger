@@ -5,8 +5,11 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { recoverPassword } from "../../services/actions/password-recover";
 export function ForgotPasswordPage() {
-  const [loginValue, setLoginValue] = useState("");
+  const dispatch = useDispatch();
+  const [emailValue, setEmailValue] = useState("");
   const inputRef = useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -23,19 +26,31 @@ export function ForgotPasswordPage() {
             <Input
               type="email"
               placeholder="E-mail"
-              onChange={(e) => setLoginValue(e.target.value)}
-              value={loginValue}
+              onChange={(e) => setEmailValue(e.target.value)}
+              value={emailValue}
               onIconClick={onIconClick}
               ref={inputRef}
               size="default"
             />
           </fieldset>
         </form>
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" onClick={(e) => {
+            e.preventDefault();
+            dispatch(recoverPassword(emailValue))
+        }}>
           Восстановить
         </Button>
       </div>
-      <p className="text text_type_main-default text_color_inactive mt-20">Вспомнили пароль? <Link className={`text text_type_main-default ${forgotStyles.link}`} to='/login'> Войти</Link></p>
+      <p className="text text_type_main-default text_color_inactive mt-20">
+        Вспомнили пароль?{" "}
+        <Link
+          className={`text text_type_main-default ${forgotStyles.link}`}
+          to="/login"
+        >
+          {" "}
+          Войти
+        </Link>
+      </p>
     </section>
   );
 }

@@ -6,16 +6,22 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
-export function RegisterPage() {
-  const [loginValue, setLoginValue] = useState("");
+import { register } from "../../services/actions/register";
+import { useDispatch } from "react-redux";
+export function RegisterPage() {    
+  const dispatch = useDispatch();
+  const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [usernameValue, setUsernameValue] = useState("");
   const inputRef = useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
     alert("Icon Click Callback");
   };
-
+  const registerUser = (e) => {
+    e.preventDefault();
+    dispatch(register(emailValue, passwordValue, usernameValue))
+  }
   return (
     <section className={registerStyles.registration}>
       <h1 className={`${registerStyles.title} text text_type_main-medium mb-6`}>
@@ -27,8 +33,8 @@ export function RegisterPage() {
           <Input
             type="text"
             placeholder="Имя"
-            onChange={(e) => setLoginValue(e.target.value)}
-            value={loginValue}
+            onChange={(e) => setUsernameValue(e.target.value)}
+            value={usernameValue}
             onIconClick={onIconClick}
             ref={inputRef}
             size="default"
@@ -36,8 +42,8 @@ export function RegisterPage() {
           <Input
             type="email"
             placeholder="E-mail"
-            onChange={(e) => setLoginValue(e.target.value)}
-            value={loginValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            value={emailValue}
             onIconClick={onIconClick}
             ref={inputRef}
             size="default"
@@ -53,7 +59,7 @@ export function RegisterPage() {
           />
         </fieldset>
       </form>
-      <Button type="primary" size="medium">
+      <Button type="primary" size="medium" onClick={registerUser}>
         Зарегистрироваться
       </Button>
       </div>
