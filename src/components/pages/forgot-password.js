@@ -4,7 +4,7 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { recoverPassword } from "../../services/actions/password-recover";
 export function ForgotPasswordPage() {
@@ -15,6 +15,8 @@ export function ForgotPasswordPage() {
     setTimeout(() => inputRef.current.focus(), 0);
     alert("Icon Click Callback");
   };
+  const history = useHistory();
+  const location = useLocation();
   return (
     <section className={forgotStyles.forgot}>
       <h1 className={`${forgotStyles.title} text text_type_main-medium mb-6`}>
@@ -36,7 +38,8 @@ export function ForgotPasswordPage() {
         </form>
         <Button type="primary" size="medium" onClick={(e) => {
             e.preventDefault();
-            dispatch(recoverPassword(emailValue))
+            dispatch(recoverPassword(emailValue));
+            history.replace({pathname: '/reset-password', state: {from: location}})
         }}>
           Восстановить
         </Button>

@@ -51,7 +51,7 @@ export function ResetPasswordPage() {
           size="medium"
           onClick={(e) => {
             e.preventDefault();
-            dispatch(resetPassword(passwordValue, emailTokenValue));
+            dispatch(resetPassword( emailTokenValue, passwordValue));
           }}
         >
           Сохранить

@@ -5,7 +5,7 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import {Link} from 'react-router-dom'
 export default function AppHeader() {
   return (
     <header className={headerStyles.header}>
@@ -35,13 +35,13 @@ export default function AppHeader() {
       <Logo />
       <div className={headerStyles.header__profile}>
         <ProfileIcon type="secondary" />
-        <a
-          href="#"
+        <Link
+          to='/profile'
           style={{ textDecoration: "none" }}
           className="text text_type_main-default text_color_inactive ml-2"
         >
           Личный кабинет
-        </a>
+        </Link>
       </div>
       </article>
     </header>
