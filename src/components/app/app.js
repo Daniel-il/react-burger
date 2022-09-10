@@ -14,7 +14,7 @@ import { RegisterPage } from '../pages/register';
 import { ForgotPasswordPage } from '../pages/forgot-password';
 import { ResetPasswordPage } from '../pages/reset-password';
 import { ProfilePage } from "../pages/profile";
-
+import { ProtectedRoute } from "../protected-route/protected-route";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -50,9 +50,9 @@ function App() {
             <Route path='/reset-password' exact={true}>
               <ResetPasswordPage />
             </Route>
-            <Route path='/profile'>
+            <ProtectedRoute path='/profile'>
                <ProfilePage />
-            </Route>
+            </ProtectedRoute>
           </Switch>
        
       </Main>

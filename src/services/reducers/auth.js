@@ -5,6 +5,8 @@ import {
 } from "../actions/register";
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/login";
 import { RECOVER_PASSWORD_FAILED, RECOVER_PASSWORD_SUCCESS, RECOVER_PASSWORD_REQUEST } from "../actions/password-recover";
+import { GET_USER_DATA_FAILED, GET_USER_DATA_SUCCESS, GET_USER_DATA_REQUEST } from "../actions/profile";
+import { setCookie } from "../../utils/utils";
 
 const authInitialState = {
   user: null,
@@ -49,6 +51,9 @@ export const authReducer = (state = authInitialState, action) => {
       };
     }
     case LOGIN_SUCCESS: {
+      setCookie('token', action.token.split('Bearer ')[1]);
+      localStorage.setItem('refreshToken', action.refreshToken)
+      
       return {
         ...state,
         request: true,

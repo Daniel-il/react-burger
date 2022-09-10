@@ -13,8 +13,11 @@
     max-width: 320px;
     width: 100%;
 }
-.link {
+.item {
     padding: 10px 0 10px;
+}
+.link {
+    text-decoration: none;
 }
 .link_active {
     color: white;

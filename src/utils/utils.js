@@ -1,3 +1,5 @@
+import { NavLink as BaseNavLink } from "react-router-dom";
+import React from 'react';
 export function checkResponse(res) {
     if (res.ok) {
         return res.json();
@@ -39,3 +41,22 @@ export function setCookie(name, value, props) {
 export function deleteCookie(name) {
   setCookie(name, null, { expires: -1 });
 }
+
+export const NavLink = React.forwardRef(
+  ({ activeClassName, ...props }, ref) => {
+    return (
+      <BaseNavLink
+        ref={ref}
+        {...props}
+        className={({ isActive }) =>
+          [
+            props.className,
+            isActive ? activeClassName : null,
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }
+      />
+    );
+  }
+);

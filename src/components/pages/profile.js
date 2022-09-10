@@ -1,12 +1,13 @@
 import profileStyles from "./profile.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useRef, useState } from "react";
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 export function ProfilePage() {
+  const {pathname} = useLocation();
   const [passwordValue, setPasswordValue] = useState("");
   const [usernameValue, setUsernameValue] = useState("");
-  
+  const {email, name} = useSelector(store => store.auth.user)
   const inputRef = useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -16,23 +17,23 @@ export function ProfilePage() {
     <section className={profileStyles.profile}>
       <div className={profileStyles.wrapper}>
         <ul className={profileStyles.links}>
-          <li className={`${profileStyles.link}`}>
+          <li className={`${profileStyles.item}`}>
             <Link
-              className={`${profileStyles.link_active} text text_type_main-medium`}
+              className={ pathname === '/profile' ? `${profileStyles.link_active} text text_type_main-medium` : `${profileStyles.link} text text_type_main-medium text_color_inactive`}
             >
               Профиль
             </Link>
           </li>
-          <li className={`${profileStyles.link}`}>
+          <li className={`${profileStyles.item}`}>
             <Link
-              className={`${profileStyles.link_active} text text_type_main-medium text_color_inactive`}
+              className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
             >
               История заказов
             </Link>
           </li>
-          <li className={`${profileStyles.link}`}>
+          <li className={`${profileStyles.item}`}>
             <Link
-              className={`${profileStyles.link_active} text text_type_main-medium text_color_inactive`}
+              className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
             >
               Выход
             </Link>
