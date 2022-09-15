@@ -14,11 +14,6 @@ export function LoginPage() {
   const {isAuth} = useSelector(store => store.auth)
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const inputRef = useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
   const loginIntoAccount = (e) => {
     e.preventDefault();
     dispatch(login(usernameValue, passwordValue))
@@ -28,7 +23,6 @@ export function LoginPage() {
     return <Redirect to='/'/>
    }
    
- 
   return (
     <section className={loginStyles.login}>
       <h1 className={`${loginStyles.title} text text_type_main-medium mb-6`}>
@@ -42,8 +36,6 @@ export function LoginPage() {
               placeholder="E-mail"
               onChange={(e) => setUsernameValue(e.target.value)}
               value={usernameValue}
-              onIconClick={onIconClick}
-              ref={inputRef}
               size="default"
             />
             <PasswordInput
@@ -52,8 +44,6 @@ export function LoginPage() {
               name="mt-6"
               onChange={(e) => setPasswordValue(e.target.value)}
               value={passwordValue}
-              onIconClick={onIconClick}
-              ref={inputRef}
               size="large"
             />
           </fieldset>

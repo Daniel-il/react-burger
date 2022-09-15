@@ -15,11 +15,17 @@ import { ForgotPasswordPage } from '../pages/forgot-password';
 import { ResetPasswordPage } from '../pages/reset-password';
 import { ProfilePage } from "../pages/profile";
 import { ProtectedRoute } from "../protected-route/protected-route";
+import { getUserData } from "../../services/actions/profile";
+import { IngredientPage } from "../pages/ingredient";
+import { Page404 } from "../pages/404";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getUserData())
+  }, [dispatch])
   const { ingredients } = useSelector((state) => state.ingredients);
   return (
     <>
@@ -50,9 +56,15 @@ function App() {
             <Route path='/reset-password' exact={true}>
               <ResetPasswordPage />
             </Route>
-            <ProtectedRoute path='/profile'>
+            <ProtectedRoute path='/profile' exact= {true}>
                <ProfilePage />
             </ProtectedRoute>
+            <Route  path='/ingredients/:id' exact={true}>
+              <IngredientPage />
+            </Route>
+            <Route>
+              <Page404 />
+            </Route>
           </Switch>
        
       </Main>

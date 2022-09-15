@@ -13,7 +13,7 @@ export function recoverPassword(email) {
     fetch(`${baseUrl}/password-reset`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,

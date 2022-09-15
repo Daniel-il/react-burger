@@ -1,19 +1,29 @@
 import ingredientStyles from "./ingredient-details.module.css";
-import PropTypes from "prop-types";
-
-function IngredientDetails(props) {
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+function IngredientDetails() {
+  const {id} = useParams();
+  const dispatch = useDispatch();
+  const {ingredientInModal} = useSelector(store => store.ingredientDetails)
+  console.log('id: ', id);
+  const { ingredients} = useSelector((store) => store.ingredients);
+  console.log(ingredients)
+  const ingredientData = ingredients.find((item) => id === item._id);
+  console.log('dataModal: ', ingredientData);
+  console.log(ingredientData)
+  
   return (
     <>
       <img
         className={`${ingredientStyles.img}`}
-        src={props.ingredientData.image}
-        alt={props.ingredientData.image}
+        src={ingredientData.image}
+        alt={ingredientData.image}
       ></img>
       <div className={`${ingredientStyles.info}`}>
         <h4
           className={`text text_type_main-medium ${ingredientStyles.text} mb-8`}
         >
-          {props.ingredientData.name}
+          {ingredientData.name}
         </h4>
         <ul className={`${ingredientStyles.list} `}>
           <li className={`${ingredientStyles.item}`}>
@@ -25,7 +35,7 @@ function IngredientDetails(props) {
             <p
               className={`text text_type_main-default text_color_inactive mb-2`}
             >
-              {props.ingredientData.calories}
+              {ingredientData.calories}
             </p>
           </li>
           <li className={`${ingredientStyles.item}`}>
@@ -37,7 +47,7 @@ function IngredientDetails(props) {
             <p
               className={`text text_type_main-default text_color_inactive mb-2`}
             >
-              {props.ingredientData.proteins}
+              {ingredientData.proteins}
             </p>
           </li>
           <li className={`${ingredientStyles.item}`}>
@@ -49,7 +59,7 @@ function IngredientDetails(props) {
             <p
               className={`text text_type_main-default text_color_inactive mb-2`}
             >
-              {props.ingredientData.fat}
+              {ingredientData.fat}
             </p>
           </li>
           <li className={`${ingredientStyles.item}`}>
@@ -61,7 +71,7 @@ function IngredientDetails(props) {
             <p
               className={`text text_type_main-default text_color_inactive mb-2`}
             >
-              {props.ingredientData.carbohydrates}
+              {ingredientData.carbohydrates}
             </p>
           </li>
         </ul>
@@ -70,7 +80,4 @@ function IngredientDetails(props) {
   );
 }
 
-IngredientDetails.propTypes = {
-    onClick: PropTypes.func.isRequired
-}
 export { IngredientDetails };

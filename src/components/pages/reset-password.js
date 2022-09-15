@@ -13,11 +13,6 @@ export function ResetPasswordPage() {
   const [passwordValue, setPasswordValue] = useState("");
   const [emailTokenValue, setEmailTokenValue] = useState("");
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
   return (
     <section className={resetStyles.reset}>
       <h1 className={`${resetStyles.title} text text_type_main-medium mb-6`}>
@@ -32,8 +27,6 @@ export function ResetPasswordPage() {
               name=""
               onChange={(e) => setEmailTokenValue(e.target.value)}
               value={emailTokenValue}
-              onIconClick={onIconClick}
-              ref={inputRef}
             />
             <Input
               type="text"
@@ -41,8 +34,6 @@ export function ResetPasswordPage() {
               name=""
               onChange={(e) => setPasswordValue(e.target.value)}
               value={passwordValue}
-              onIconClick={onIconClick}
-              ref={inputRef}
             />
           </fieldset>
         </form>

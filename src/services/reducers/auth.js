@@ -6,7 +6,8 @@ import {
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/login";
 import { RECOVER_PASSWORD_FAILED, RECOVER_PASSWORD_SUCCESS, RECOVER_PASSWORD_REQUEST } from "../actions/password-recover";
 import { GET_USER_DATA_FAILED, GET_USER_DATA_SUCCESS, GET_USER_DATA_REQUEST } from "../actions/profile";
-import { setCookie } from "../../utils/utils";
+import { CHANGE_USER_DATA_REQUEST, CHANGE_USER_DATA_SUCCESS, CHANGE_USER_DATA_FAILED, LOGOUT_FAILED, LOGOUT_SUCCESS, LOGOUT_REQUEST} from "../actions/profile";
+import { setCookie, getCookie } from "../../utils/utils";
 
 const authInitialState = {
   user: null,
@@ -52,8 +53,8 @@ export const authReducer = (state = authInitialState, action) => {
     }
     case LOGIN_SUCCESS: {
       setCookie('token', action.token.split('Bearer ')[1]);
-      localStorage.setItem('refreshToken', action.refreshToken)
-      
+      setCookie('refreshToken', action.refreshToken);
+      console.log(localStorage.getItem('refreshToken'))
       return {
         ...state,
         request: true,
@@ -78,6 +79,75 @@ export const authReducer = (state = authInitialState, action) => {
             request: false,
             isFailed:true
         }
+    }
+    case GET_USER_DATA_SUCCESS: {
+        return {
+            ...state,
+            request: true,
+            isFailed: false,
+            user: action.user,
+            isAuth: true,
+        }
+    }
+    case GET_USER_DATA_FAILED: {
+        return {
+            ...state,
+            request: false,
+            isFailed: true
+        }
+    }
+    case GET_USER_DATA_REQUEST: {
+        return {
+            ...state,
+            request: true,
+            isFailed: false
+        }
+    }
+    case CHANGE_USER_DATA_REQUEST: {
+        return {
+            ...state,
+            request: true,
+            isFailed: false,
+        }
+    }
+    case CHANGE_USER_DATA_SUCCESS: {
+        return {
+            ...state,
+            request: true,
+            isFailed: false,
+            user: action.user
+        }
+    }
+    case CHANGE_USER_DATA_FAILED: {
+        return {
+            ...state,
+            request: false,
+            isFailed: true,
+        }
+    }
+    case LOGOUT_REQUEST: {
+      return {
+        ...state,
+        request: true,
+        isFailed: false
+      }
+    }
+    case LOGOUT_SUCCESS: {
+      return {
+        ...state,
+        request: true,
+        isFailed: false,
+        user: null, 
+        isAuth: false,
+        accessToken: null,
+      }
+    }
+    case LOGOUT_FAILED: {
+      return {
+        ...state,
+        request: false,
+        isFailed: true,
+      }
     }
     default: {
         return state

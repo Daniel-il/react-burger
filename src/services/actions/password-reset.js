@@ -13,7 +13,7 @@ export function resetPassword(password, emailToken) {
     fetch(`${baseUrl}/password-reset/reset`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         password: password,

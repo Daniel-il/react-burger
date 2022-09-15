@@ -9,12 +9,7 @@ import { useDispatch } from "react-redux";
 import { recoverPassword } from "../../services/actions/password-recover";
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const [emailValue, setEmailValue] = useState("");
-  const inputRef = useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
+  const [emailValue, setEmailValue] = useState(""); 
   const history = useHistory();
   const location = useLocation();
   return (
@@ -30,8 +25,6 @@ export function ForgotPasswordPage() {
               placeholder="E-mail"
               onChange={(e) => setEmailValue(e.target.value)}
               value={emailValue}
-              onIconClick={onIconClick}
-              ref={inputRef}
               size="default"
             />
           </fieldset>
