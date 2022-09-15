@@ -3,14 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 function IngredientDetails() {
   const {id} = useParams();
-  const dispatch = useDispatch();
-  const {ingredientInModal} = useSelector(store => store.ingredientDetails)
-  console.log('id: ', id);
+  
   const { ingredients} = useSelector((store) => store.ingredients);
-  console.log(ingredients)
+
   const ingredientData = ingredients.find((item) => id === item._id);
-  console.log('dataModal: ', ingredientData);
-  console.log(ingredientData)
+
   
   return (
     <>
