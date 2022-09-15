@@ -1,13 +1,9 @@
 import orderStyles from "./order-details.module.css";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import doneIcon from "../../images/done.png";
 import PropTypes from 'prop-types'
 function OrderDetails(props) {
   return (
     <>
-      <div className={`${orderStyles.wrapper}`}>
-        <CloseIcon type="primary" onClick={props.onClick} />
-      </div>
       <p className={`text text_type_digits-large ${orderStyles.digits}`}>
         {props.orderNumber}
       </p>
