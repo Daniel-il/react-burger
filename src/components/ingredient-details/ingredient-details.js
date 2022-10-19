@@ -7,7 +7,7 @@ function IngredientDetails() {
   const { ingredients} = useSelector((store) => store.ingredients);
 
   const ingredientData = ingredients.find((item) => id === item._id);
-
+  if (!ingredientData) return null
   
   return (
     <>

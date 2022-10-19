@@ -6,22 +6,22 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function DraggableFilling({ ingredient, counter }) {
+  let location = useLocation();
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: ingredient,
   });
   const dispatch = useDispatch();
   return (
-    <li
-      className={fillingsStyles.item}
-      ref={dragRef}
-      draggable
-    >
+    <li className={fillingsStyles.item} ref={dragRef} draggable>
       <Link
-        to={`/ingredients/${ingredient._id}`}
+        to={{
+          pathname: `/ingredients/${ingredient._id}`,
+          state: { background: location },
+        }}
         className={fillingsStyles.link}
       >
         <Counter count={counter} size="default" />

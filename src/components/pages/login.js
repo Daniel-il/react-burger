@@ -1,6 +1,6 @@
 import loginStyles from "./login.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState} from "react";
+import { useRef, useState } from "react";
 import {
   Input,
   PasswordInput,
@@ -11,25 +11,25 @@ import { login } from "../../services/actions/login";
 
 export function LoginPage() {
   const dispatch = useDispatch();
-  const {isAuth} = useSelector(store => store.auth)
+  const { isAuth } = useSelector((store) => store.auth);
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const loginIntoAccount = (e) => {
     e.preventDefault();
-    dispatch(login(usernameValue, passwordValue))
+    dispatch(login(usernameValue, passwordValue));
+  };
+
+  if (isAuth) {
+    return <Redirect to="/" />;
   }
-  
-   if (isAuth) {
-    return <Redirect to='/'/>
-   }
-   
+
   return (
     <section className={loginStyles.login}>
       <h1 className={`${loginStyles.title} text text_type_main-medium mb-6`}>
         Вход
       </h1>
       <div className={loginStyles.wrapper}>
-        <form className={loginStyles.form}>
+        <form className={loginStyles.form} onSubmit={loginIntoAccount}>
           <fieldset className={loginStyles.fieldset}>
             <Input
               type="email"
@@ -47,10 +47,10 @@ export function LoginPage() {
               size="large"
             />
           </fieldset>
+          <Button type="primary" size="medium">
+            Войти
+          </Button>
         </form>
-        <Button type="primary" size="medium" onClick={loginIntoAccount}>
-          Войти
-        </Button>
       </div>
       <ul className={loginStyles.actions}>
         <li

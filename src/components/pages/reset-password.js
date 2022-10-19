@@ -19,7 +19,13 @@ export function ResetPasswordPage() {
         Восстановление пароля
       </h1>
       <div className={resetStyles.wrapper}>
-        <form className={resetStyles.form}>
+        <form
+          className={resetStyles.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(resetPassword(emailTokenValue, passwordValue));
+          }}
+        >
           <fieldset className={resetStyles.fieldset}>
             <PasswordInput
               type="text"
@@ -36,17 +42,10 @@ export function ResetPasswordPage() {
               value={passwordValue}
             />
           </fieldset>
+          <Button type="primary" size="medium">
+            Сохранить
+          </Button>
         </form>
-        <Button
-          type="primary"
-          size="medium"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(resetPassword( emailTokenValue, passwordValue));
-          }}
-        >
-          Сохранить
-        </Button>
       </div>
       <p className="text text_type_main-default text_color_inactive mt-20">
         Вспомнили пароль?{" "}

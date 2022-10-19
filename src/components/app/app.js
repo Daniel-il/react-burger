@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import "./app";
 import AppHeader from "../app-header/app-header";
 import Main from "../main/main";
@@ -8,67 +8,93 @@ import { getIngredients } from "../../services/actions/burger-ingredients";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { LoginPage } from '../pages/login';
-import { RegisterPage } from '../pages/register';
-import { ForgotPasswordPage } from '../pages/forgot-password';
-import { ResetPasswordPage } from '../pages/reset-password';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
+import { LoginPage } from "../pages/login";
+import { RegisterPage } from "../pages/register";
+import { ForgotPasswordPage } from "../pages/forgot-password";
+import { ResetPasswordPage } from "../pages/reset-password";
 import { ProfilePage } from "../pages/profile";
 import { ProtectedRoute } from "../protected-route/protected-route";
 import { getUserData } from "../../services/actions/profile";
 import { IngredientPage } from "../pages/ingredient";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Page404 } from "../pages/404";
+import { Modal } from "../modal/modal";
+
 function App() {
+  const location = useLocation();
+  const background = location.state && location.state.background;
+  const history = useHistory();
+  const closeIngredientModal = useCallback(() => {
+    history.replace({ pathname: "/" });
+  }, [history]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
   useEffect(() => {
-    dispatch(getUserData())
-  }, [dispatch])
+    dispatch(getUserData());
+  }, [dispatch]);
   const { ingredients } = useSelector((state) => state.ingredients);
+  console.log(location);
   return (
     <>
-    <Router>
       <AppHeader />
       <Main>
-        
-          <Switch>
-            <Route path="/" exact={true}>
-              <DndProvider backend={HTML5Backend}>
-                {ingredients && (
-                  <>
-                    <BurgerIngredients />
-                    <BurgerConstructor />
-                  </>
-                )}
-              </DndProvider>
-            </Route>
-            <Route path='/login' exact={true}>
-              <LoginPage />
-            </Route>
-            <Route path='/register' exact={true}>
-              <RegisterPage />
-            </Route>
-            <Route path='/forgot-password' exact={true}>
-              <ForgotPasswordPage />
-            </Route>
-            <Route path='/reset-password' exact={true}>
-              <ResetPasswordPage />
-            </Route>
-            <ProtectedRoute path='/profile' exact= {true}>
-               <ProfilePage />
-            </ProtectedRoute>
-            <Route  path='/ingredients/:id' exact={true}>
-              <IngredientPage />
-            </Route>
-            <Route>
-              <Page404 />
-            </Route>
-          </Switch>
-       
+        <Switch location={background || location}>
+          <Route path="/" exact={true}>
+            <DndProvider backend={HTML5Backend}>
+              {ingredients && (
+                <>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </>
+              )}
+            </DndProvider>
+          </Route>
+
+          <Route path="/login" exact={true}>
+            <LoginPage />
+          </Route>
+
+          <Route path="/register" exact={true}>
+            <RegisterPage />
+          </Route>
+
+          <Route path="/forgot-password" exact={true}>
+            <ForgotPasswordPage />
+          </Route>
+
+          <Route path="/reset-password" exact={true}>
+            <ResetPasswordPage />
+          </Route>
+
+          <Route path="/ingredients/:id" exact={true}>
+            <IngredientPage />
+          </Route>
+
+          <ProtectedRoute path="/profile" exact={true}>
+            <ProfilePage />
+          </ProtectedRoute>
+          
+          <Route>
+            <Page404 />
+          </Route>
+        </Switch>
+        {background && (
+          <Route path="/ingredients/:id" exact={true}>
+            <Modal title="Детали ингредиента" onClose={closeIngredientModal}>
+              <IngredientDetails />
+            </Modal>
+          </Route>
+        )}
       </Main>
-      </Router>
     </>
   );
 }

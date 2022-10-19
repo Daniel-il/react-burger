@@ -18,7 +18,7 @@ import { useHistory } from "react-router-dom";
 export default function BurgerConstructor() {
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
   const { orderNumber } = useSelector((store) => store.orderDetails);
-  const {isAuth} = useSelector(store => store.auth);
+  const { isAuth } = useSelector((store) => store.auth);
   const { bun, filling } = useSelector(
     (store) => store.burgerConstructorIngredients.constructorIngredients
   );
@@ -52,7 +52,7 @@ export default function BurgerConstructor() {
 
   const openOrderModal = () => {
     if (!isAuth) {
-      history.push('/login')
+      history.push("/login");
     } else {
       setIsOrderDetailsOpened(true);
       dispatch(postIngredientsToServer(getIds()));
@@ -106,9 +106,25 @@ export default function BurgerConstructor() {
             <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
             <CurrencyIcon type="primary" />
           </div>
-          <Button type="primary" size="large" onClick={openOrderModal}>
-            Оформить заказ
-          </Button>
+
+          {!bun && filling.length <= 0 ? (
+            <Button
+              type="primary"
+              size="large"
+              onClick={openOrderModal}
+              disabled
+            >
+              Оформить заказ
+            </Button>
+          ) : (
+            <Button
+              type="primary"
+              size="large"
+              onClick={openOrderModal}
+            >
+              Оформить заказ
+            </Button>
+          )}
         </article>
       </section>
       {isOrderDetailsOpened && (

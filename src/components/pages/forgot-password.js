@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { recoverPassword } from "../../services/actions/password-recover";
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const [emailValue, setEmailValue] = useState(""); 
+  const [emailValue, setEmailValue] = useState("");
   const history = useHistory();
   const location = useLocation();
   return (
@@ -18,7 +18,11 @@ export function ForgotPasswordPage() {
         Восстановление пароля
       </h1>
       <div className={forgotStyles.wrapper}>
-        <form className={forgotStyles.form}>
+        <form className={forgotStyles.form} onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(recoverPassword(emailValue));
+            history.replace({pathname: '/reset-password', state: {from: location}})
+        }}>
           <fieldset className={forgotStyles.fieldset}>
             <Input
               type="email"
@@ -28,14 +32,10 @@ export function ForgotPasswordPage() {
               size="default"
             />
           </fieldset>
+          <Button type="primary" size="medium">
+            Восстановить
+          </Button>
         </form>
-        <Button type="primary" size="medium" onClick={(e) => {
-            e.preventDefault();
-            dispatch(recoverPassword(emailValue));
-            history.replace({pathname: '/reset-password', state: {from: location}})
-        }}>
-          Восстановить
-        </Button>
       </div>
       <p className="text text_type_main-default text_color_inactive mt-20">
         Вспомнили пароль?{" "}
