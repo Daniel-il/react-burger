@@ -5,7 +5,7 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation, Redirect } from "react-router-dom";
 import { resetPassword } from "../../services/actions/password-reset";
 import { useDispatch } from "react-redux";
 
@@ -13,6 +13,10 @@ export function ResetPasswordPage() {
   const [passwordValue, setPasswordValue] = useState("");
   const [emailTokenValue, setEmailTokenValue] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
+  if (  location.state === undefined || location.state.from.pathname !== "/forgot-password") {
+    return <Redirect to={"/"} />;
+  }
   return (
     <section className={resetStyles.reset}>
       <h1 className={`${resetStyles.title} text text_type_main-medium mb-6`}>

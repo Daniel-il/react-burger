@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   useLocation,
@@ -26,6 +25,7 @@ import { IngredientPage } from "../pages/ingredient";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Page404 } from "../pages/404";
 import { Modal } from "../modal/modal";
+import { getCookie } from "../../utils/utils";
 
 function App() {
   const location = useLocation();
@@ -38,11 +38,12 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(getUserData());
-  }, [dispatch]);
+  useEffect(()=> {
+    if(getCookie('token')) {
+      dispatch(getUserData())
+    }
+  })
   const { ingredients } = useSelector((state) => state.ingredients);
-  console.log(location);
   return (
     <>
       <AppHeader />

@@ -29,6 +29,7 @@ export function ProfilePage() {
                   ? `${profileStyles.link_active} text text_type_main-medium`
                   : `${profileStyles.link} text text_type_main-medium text_color_inactive`
               }
+              to='/profile'
             >
               Профиль
             </Link>
@@ -36,7 +37,7 @@ export function ProfilePage() {
           <li className={`${profileStyles.item}`}>
             <Link
               className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
-              to='/zxc'
+              to='/404'
             >
               История заказов
             </Link>
@@ -46,9 +47,8 @@ export function ProfilePage() {
               className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
               onClick={() => {
                 dispatch(logout())
-                history.push('/')
               }}
-              to
+              to="/"
             >
               Выход
             </Link>
