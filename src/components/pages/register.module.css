@@ -1,0 +1,38 @@
+.registration {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.title {
+    text-align: center;
+    
+}
+.input {
+    width: 480px !important;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    gap: 24px 0;
+    display: flex;
+    flex-direction: column;
+}
+.fieldset {
+    display: flex;
+    margin: 0 0 24px;
+    padding: 0;
+    border: none;
+    gap: 24px 0;
+    flex-direction: column;
+}
+.link {
+    color: #4C4CFF;
+    text-decoration: none;
+}
