@@ -1,6 +1,4 @@
-import { Modal } from "../modal/modal";
-import { useCallback } from "react";
-import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { IngredientDetails } from "../components/ingredient-details/ingredient-details";
 import { useHistory, useLocation } from "react-router-dom";
 import ingredientStyles from "./ingredient.module.css";
 

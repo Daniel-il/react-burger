@@ -14,18 +14,19 @@ import {
   useLocation,
   useHistory,
 } from "react-router-dom";
-import { LoginPage } from "../pages/login";
-import { RegisterPage } from "../pages/register";
-import { ForgotPasswordPage } from "../pages/forgot-password";
-import { ResetPasswordPage } from "../pages/reset-password";
-import { ProfilePage } from "../pages/profile";
+import { LoginPage } from "../../pages/login"
+import { RegisterPage } from "../../pages/register";
+import { ForgotPasswordPage } from "../../pages/forgot-password";
+import { ResetPasswordPage } from "../../pages/reset-password";
+import { ProfilePage } from "../../pages/profile";
 import { ProtectedRoute } from "../protected-route/protected-route";
 import { getUserData } from "../../services/actions/profile";
-import { IngredientPage } from "../pages/ingredient";
+import { IngredientPage } from "../../pages/ingredient";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { Page404 } from "../pages/404";
+import { Page404 } from "../../pages/404";
 import { Modal } from "../modal/modal";
 import { getCookie } from "../../utils/utils";
+import { FeedPage } from "../../pages/feed";
 
 function App() {
   const location = useLocation();
@@ -83,7 +84,9 @@ function App() {
           <ProtectedRoute path="/profile" exact={true}>
             <ProfilePage />
           </ProtectedRoute>
-          
+          <Route path='/feed' exact={true}>
+                <FeedPage  />
+          </Route>
           <Route>
             <Page404 />
           </Route>

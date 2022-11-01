@@ -7,8 +7,8 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
-import { changeUserData} from "../../services/actions/profile";
-import { logout } from "../../services/actions/profile";
+import { changeUserData } from "../services/actions/profile";
+import { logout } from "../services/actions/profile";
 export function ProfilePage() {
   const location = useLocation();
   const { email, name } = useSelector((store) => store.auth.user);
