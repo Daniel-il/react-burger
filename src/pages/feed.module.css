@@ -4,6 +4,7 @@
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
+ 
 }
 .title {
   display: flex;
@@ -16,35 +17,15 @@
   max-width: 584px;
   width: 100%;
   padding: 0;
+  height: 768px;
+  overflow-y: scroll;
 }
-.order {
-  background: #1c1c21;
-  border-radius: 40px;
-  margin-bottom: 16px;
+.orders::-webkit-scrollbar {
+  width: 8px;
 }
-.order_id {
-  display: flex;
-  max-width: 534px;
-  width: 100%;
-  justify-content: space-between;
-  margin: 24px auto 24px;
+.orders::-webkit-scrollbar-track {
+  background: #2f2f37;
 }
-.order_info {
-    display: flex;
-    max-width: 534px;
-    width: 100%;
-    justify-content: space-between;
-    margin: 0 auto 24px;
-}
-.order_ingredients {
-    display: flex;
-}
-.info { 
-  margin: 0;
-}
-.id {
-  margin: 0;
-}
-.timestamp {
-  margin: 0;
+.orders::-webkit-scrollbar-thumb {
+  background: #8585ad;
 }
