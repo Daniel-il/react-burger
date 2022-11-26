@@ -1,0 +1,29 @@
+.orders__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 916px;
+}
+.orders__list::-webkit-scrollbar {
+  width: 8px;
+}
+.orders__list::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.orders__list::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}
+.ordersboard {
+  max-width: 844px;
+  width: 100%;
+}
+.orders {
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  margin: 40px auto 0;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}

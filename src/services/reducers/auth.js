@@ -52,7 +52,7 @@ export const authReducer = (state = authInitialState, action) => {
       };
     }
     case LOGIN_SUCCESS: {
-      setCookie('token', action.token.split('Bearer ')[1]);
+      setCookie('token', action.token.split('Bearer ')[1], 100);
       setCookie('refreshToken', action.refreshToken);
       console.log(localStorage.getItem('refreshToken'))
       return {

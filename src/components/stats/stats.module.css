@@ -1,32 +1,60 @@
 .stats {
-    max-width:  580px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 100px 0 0;
+  max-width: 580px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 100px 0 0;
 }
 .orders {
-    max-width: 580px;
-    width: 100%;
-    margin-bottom: 60px;
-    display: flex;
+  max-width: 580px;
+  width: 100%;
+  margin-bottom: 60px;
+  display: flex;
 }
-.done { 
-    max-width: 272px;
-    width: 100%;
-    margin-right: 36px;
+.done {
+  max-width: 272px;
+  width: 100%;
+  margin-right: 36px;
 }
 .done__item {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 .done__item:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
-.done__digits { 
-    color: #00CCCC;
+.done__digits {
+  color: #00cccc;
 }
 .done__list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  flex-wrap: wrap;
+  overflow-x: scroll;
+  gap: 5px;
+}
+.inWork__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  flex-wrap: wrap;
+}
+.completed {
+  display: flex;
+  flex-direction: column;
+}
+.done__list::-webkit-scrollbar {
+  width: 8px;
+}
+.done__list::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.done__list::-webkit-scrollbar-thumb {
+  background: #8585ad;
 }

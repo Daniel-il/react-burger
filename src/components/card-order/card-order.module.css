@@ -2,20 +2,21 @@
   background: #1c1c21;
   border-radius: 40px;
   margin-bottom: 16px;
+  text-decoration: none;
 }
 .order_id {
   display: flex;
-  max-width: 534px;
-  width: 100%;
+  max-width: 800px;
   justify-content: space-between;
-  margin: 24px auto 24px;
+  padding: 24px 0 24px 24px;
 }
 .order_info {
   display: flex;
   max-width: 534px;
   width: 100%;
   justify-content: space-between;
-  margin: 0 auto 24px;
+  padding: 0 0 24px 24px;
+  align-items: center;
 }
 .order_ingredients {
   display: flex;
@@ -25,11 +26,10 @@
   max-width: 304px;
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 .order_price {
   display: flex;
-  
+  padding-right: 60px;
 }
 .info {
   margin: 0;
@@ -45,7 +45,9 @@
   border-radius: 100px;
   border: 2px solid #4C4CFF;
   box-sizing: border-box;
-  margin-left: -12px;
+  margin-left: -10px; 
+  display: flex;
+  align-items: center;
 }
 .ingredient:nth-of-type(1) {
   margin-left: 0;

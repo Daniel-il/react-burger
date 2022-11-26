@@ -27,6 +27,8 @@ import { Page404 } from "../../pages/404";
 import { Modal } from "../modal/modal";
 import { getCookie } from "../../utils/utils";
 import { FeedPage } from "../../pages/feed";
+import { OrdersPage } from "../../pages/orders";
+import { OrderInfo } from "../../pages/order-info";
 
 function App() {
   const location = useLocation();
@@ -35,6 +37,9 @@ function App() {
   const closeIngredientModal = useCallback(() => {
     history.replace({ pathname: "/" });
   }, [history]);
+  const closeOrdersModal = useCallback(()=> {
+    history.replace(history.goBack())
+  },[history])
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
@@ -84,20 +89,50 @@ function App() {
           <ProtectedRoute path="/profile" exact={true}>
             <ProfilePage />
           </ProtectedRoute>
+
+          <ProtectedRoute path ='/profile/orders'  exact={true}> 
+            <OrdersPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute path='/profile/orders/:id'  exact={true}>
+              <OrderInfo />
+          </ProtectedRoute>
+
           <Route path='/feed' exact={true}>
                 <FeedPage  />
           </Route>
+
+          <Route path='/feed/:id'  exact={true}>
+                <OrderInfo />
+          </Route>
+
           <Route>
             <Page404 />
           </Route>
         </Switch>
         {background && (
+          <>
           <Route path="/ingredients/:id" exact={true}>
             <Modal title="Детали ингредиента" onClose={closeIngredientModal}>
               <IngredientDetails />
             </Modal>
           </Route>
-        )}
+        
+        
+          <Route path='/feed/:id' >
+              <Modal title=''  onClose={closeOrdersModal}>
+                  <OrderInfo />
+              </Modal>
+          </Route>
+        
+       
+          <Route path='/profile/orders/:id'>
+              <Modal title=''  onClose={closeOrdersModal}>
+                  <OrderInfo />
+              </Modal>
+          </Route>
+        </>
+      )}
       </Main>
     </>
   );

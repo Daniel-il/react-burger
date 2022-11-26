@@ -8,11 +8,23 @@ import App from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
 import { rootReducer } from "./services/reducers";
 import { BrowserRouter as Router } from "react-router-dom";
+import { socketMiddleware } from "./services/middleware/socketMiddleware";
+import { WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_GET_MESSAGE, WS_CONNECTION_SUCCESS, WS_CONNECTION_CLOSED, WS_SEND_MESSAGE, WS_CONNECTION_START_WITH_USER} from "./services/actions/wsActions";
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+const wsActions = {
+  wsInit: WS_CONNECTION_START,
+  wsInitWithUser: WS_CONNECTION_START_WITH_USER,
+  wsSendMessage: WS_SEND_MESSAGE,
+  onOpen: WS_CONNECTION_SUCCESS,
+  onClose: WS_CONNECTION_CLOSED,
+  onError: WS_CONNECTION_ERROR,
+  onMessage: WS_GET_MESSAGE
+};
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions)));
 const store = createStore(rootReducer, enhancer);
 const root = createRoot(document.getElementById("root"));
 root.render(

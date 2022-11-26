@@ -8,7 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { changeUserData } from "../services/actions/profile";
-import { logout } from "../services/actions/profile";
+import { Navigation } from "../components/navigation/navigation";
 export function ProfilePage() {
   const location = useLocation();
   const { email, name } = useSelector((store) => store.auth.user);
@@ -20,46 +20,7 @@ export function ProfilePage() {
   
   return (
     <section className={profileStyles.profile}>
-      <div className={profileStyles.wrapper}>
-        <ul className={profileStyles.links}>
-          <li className={`${profileStyles.item}`}>
-            <Link
-              className={
-                location.pathname === "/profile"
-                  ? `${profileStyles.link_active} text text_type_main-medium`
-                  : `${profileStyles.link} text text_type_main-medium text_color_inactive`
-              }
-              to='/profile'
-            >
-              Профиль
-            </Link>
-          </li>
-          <li className={`${profileStyles.item}`}>
-            <Link
-              className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
-              to='/404'
-            >
-              История заказов
-            </Link>
-          </li>
-          <li className={`${profileStyles.item}`}>
-            <Link
-              className={`text text_type_main-medium text_color_inactive ${profileStyles.link} `}
-              onClick={() => {
-                dispatch(logout())
-              }}
-              to="/"
-            >
-              Выход
-            </Link>
-          </li>
-        </ul>
-        <p
-          className={`${profileStyles.caption} text text_type_main-small text_color_inactive`}
-        >
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
-      </div>
+      <Navigation />  
       <article className={profileStyles.edit}>
         <form className={profileStyles.form}>
           <fieldset className={profileStyles.fieldset}>
