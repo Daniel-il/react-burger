@@ -52,8 +52,8 @@ export const authReducer = (state = authInitialState, action) => {
       };
     }
     case LOGIN_SUCCESS: {
-      setCookie('token', action.token.split('Bearer ')[1], 100);
-      setCookie('refreshToken', action.refreshToken);
+      setCookie('token', action.token.split('Bearer ')[1]);
+      localStorage.setItem('refreshToken', action.refreshToken);
       console.log(localStorage.getItem('refreshToken'))
       return {
         ...state,
@@ -140,6 +140,7 @@ export const authReducer = (state = authInitialState, action) => {
         user: null, 
         isAuth: false,
         accessToken: null,
+        refreshToken: null,
       }
     }
     case LOGOUT_FAILED: {

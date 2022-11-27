@@ -4,7 +4,7 @@ import { CardOrder } from "../components/card-order/card-order";
 import { Stats } from "../components/stats/stats";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,} from "react-router-dom";
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSED,
@@ -33,13 +33,13 @@ export function FeedPage() {
           {orders &&
             orders.map((order) => {
               return (
-                <React.Fragment key={order._id}>
                   <Link
                     className={feedStyles.link}
                     to={{
                       pathname: `/feed/${order._id}`,
-                      background: location,
+                      state: { background: location }
                     }}
+                    key={order.number}
                   >
                     <CardOrder
                       id={order.number}
@@ -48,7 +48,6 @@ export function FeedPage() {
                       name={order.name}
                     />
                   </Link>
-                </React.Fragment>
               );
             })}
         </ul>

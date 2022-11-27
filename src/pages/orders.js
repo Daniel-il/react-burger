@@ -23,6 +23,7 @@ export function OrdersPage() {
     };
   }, [dispatch, token]);
   const location = useLocation();
+  const background = location.state && location.state.background;
   const { orders } = useSelector((store) => store.ws);
   
   return (
@@ -38,7 +39,7 @@ export function OrdersPage() {
                     className={ordersStyles.link}
                     to={{
                       pathname: `/profile/orders/${order._id}`,
-                      background: location,
+                      state: {background: location},
                     }}
                   >
                     <CardOrder

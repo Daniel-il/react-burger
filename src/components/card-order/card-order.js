@@ -8,7 +8,6 @@ export function CardOrder({ id, ingredientsList, date, name }) {
   let countingIngredients
   let ingredientsArr;
   const [totalPrice, setTotalPrice] = useState();
-
   useEffect(() => {
     let initialCost = 0;
        countingIngredients = ingredientsList.map((ingredient) => {
@@ -43,38 +42,38 @@ export function CardOrder({ id, ingredientsList, date, name }) {
           {(() => {
             if (ingredientsList.length > 5) {
               ingredientsArr = ingredientsList.slice(0, 5);
-
-              return ingredientsArr.map((ingredient) => {
+              const uniqueItems = Array.from(new Set(ingredientsArr))
+              return uniqueItems.map((ingredient) => {
                 const ingredientInOrder = ingredients.find(
                   (el) => el._id === ingredient
                 );
                 return (
-                  <React.Fragment key={nanoid()}>
-                  <li className={cardStyles.ingredient} key={nanoid()}>
+                 
+                  <li className={cardStyles.ingredient} key={ingredientInOrder.number}>
                     <img
                       className={cardStyles.ingredient_image}
                       src={ingredientInOrder.image}
                       alt={ingredientInOrder.name}
                     />
                   </li>
-                  </React.Fragment>
+        
                 );
               });
             } else {
-              return ingredientsList.map((ingredient) => {
+              const uniqueItems = Array.from(new Set(ingredientsList))
+              return uniqueItems.map((ingredient) => {
                 const ingredientInOrder = ingredients.find(
                   (el) => el._id === ingredient
                 );
                 return (
-                  <React.Fragment key={nanoid()}>
-                    <li className={cardStyles.ingredient}>
+                    <li className={cardStyles.ingredient} key={ingredientInOrder.number}>
                       <img
                         className={cardStyles.ingredient_image}
                         src={ingredientInOrder.image}
                         alt={ingredientInOrder.name}
                       />
                     </li>
-                  </React.Fragment>
+
                 );
               });
             }

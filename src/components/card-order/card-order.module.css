@@ -18,6 +18,10 @@
   padding: 0 0 24px 24px;
   align-items: center;
 }
+.link {
+  text-decoration: none;
+  color: white;
+}
 .order_ingredients {
   display: flex;
   list-style-type: none;

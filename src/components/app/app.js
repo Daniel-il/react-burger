@@ -8,13 +8,8 @@ import { getIngredients } from "../../services/actions/burger-ingredients";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import {
-  Route,
-  Switch,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
-import { LoginPage } from "../../pages/login"
+import { Route, Switch, useLocation, useHistory } from "react-router-dom";
+import { LoginPage } from "../../pages/login";
 import { RegisterPage } from "../../pages/register";
 import { ForgotPasswordPage } from "../../pages/forgot-password";
 import { ResetPasswordPage } from "../../pages/reset-password";
@@ -29,26 +24,32 @@ import { getCookie } from "../../utils/utils";
 import { FeedPage } from "../../pages/feed";
 import { OrdersPage } from "../../pages/orders";
 import { OrderInfo } from "../../pages/order-info";
-
+import { OrderFull } from "../../pages/order-full";
 function App() {
   const location = useLocation();
-  const background = location.state && location.state.background;
+  const { background } = location.state || { location };
+  const { orders } = useSelector((store) => store.ws);
   const history = useHistory();
   const closeIngredientModal = useCallback(() => {
     history.replace({ pathname: "/" });
   }, [history]);
-  const closeOrdersModal = useCallback(()=> {
-    history.replace(history.goBack())
-  },[history])
+  const closeOrderFeedModal = useCallback(() => {
+    history.replace({pathname: '/feed'});
+  }, [history]);
+
+  const closeProfiledModal = useCallback(() => {
+    history.replace({pathname: '/profile/orders'});
+  }, [history]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
-  useEffect(()=> {
-    if(getCookie('token')) {
-      dispatch(getUserData())
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(getUserData());
     }
-  })
+  });
   const { ingredients } = useSelector((state) => state.ingredients);
   return (
     <>
@@ -90,20 +91,20 @@ function App() {
             <ProfilePage />
           </ProtectedRoute>
 
-          <ProtectedRoute path ='/profile/orders'  exact={true}> 
+          <ProtectedRoute path="/profile/orders" exact={true}>
             <OrdersPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path='/profile/orders/:id'  exact={true}>
-              <OrderInfo />
+          <ProtectedRoute path="/profile/orders/:id" exact={true}>
+          <OrderInfo/>
           </ProtectedRoute>
 
-          <Route path='/feed' exact={true}>
-                <FeedPage  />
+          <Route path="/feed" exact={true}>
+            <FeedPage />
           </Route>
 
-          <Route path='/feed/:id'  exact={true}>
-                <OrderInfo />
+          <Route path="/feed/:id" >
+          <OrderInfo />
           </Route>
 
           <Route>
@@ -112,27 +113,28 @@ function App() {
         </Switch>
         {background && (
           <>
-          <Route path="/ingredients/:id" exact={true}>
-            <Modal title="Детали ингредиента" onClose={closeIngredientModal}>
-              <IngredientDetails />
-            </Modal>
-          </Route>
-        
-        
-          <Route path='/feed/:id' >
-              <Modal title=''  onClose={closeOrdersModal}>
-                  <OrderInfo />
+            <Route path="/ingredients/:id" exact={true}>
+              <Modal title="Детали ингредиента" onClose={closeIngredientModal}>
+                <IngredientDetails />
               </Modal>
-          </Route>
+            </Route>
         
-       
-          <Route path='/profile/orders/:id'>
-              <Modal title=''  onClose={closeOrdersModal}>
-                  <OrderInfo />
+        
+          <Route path="/feed/:id" exact={true}>
+              <Modal title="" onClose={closeOrderFeedModal}>
+                <OrderInfo/>
               </Modal>
-          </Route>
-        </>
-      )}
+            </Route>
+
+            <Route path="/profile/orders/:id" exact={true}>
+              
+                <Modal title="" onClose={closeProfiledModal}>
+                  <OrderInfo/>
+                </Modal>
+              
+            </Route>
+          </>
+        )}
       </Main>
     </>
   );

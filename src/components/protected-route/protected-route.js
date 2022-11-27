@@ -6,7 +6,7 @@ export function ProtectedRoute({ children, ...rest }) {
     const {user, isAuth} = useSelector(store => store.auth)
 
     const location = useLocation();
-    if (!isAuth) {
+    if (!user) {
       return null
     }
 

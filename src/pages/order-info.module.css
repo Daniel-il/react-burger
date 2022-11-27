@@ -8,7 +8,9 @@
     flex-direction: column;
 }
 .orderInfo__id {
-    text-align: center;
+    text-align: start;
+    margin-top: 20px;
+
 }
 .orderInfo__status { 
     color: #00CCCC;
