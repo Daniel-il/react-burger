@@ -49,7 +49,7 @@ export function CardOrder({ id, ingredientsList, date, name }) {
                 );
                 return (
                  
-                  <li className={cardStyles.ingredient} key={ingredientInOrder.number}>
+                  <li className={cardStyles.ingredient} key={nanoid()}>
                     <img
                       className={cardStyles.ingredient_image}
                       src={ingredientInOrder.image}
@@ -66,7 +66,7 @@ export function CardOrder({ id, ingredientsList, date, name }) {
                   (el) => el._id === ingredient
                 );
                 return (
-                    <li className={cardStyles.ingredient} key={ingredientInOrder.number}>
+                    <li className={cardStyles.ingredient} key={nanoid()}>
                       <img
                         className={cardStyles.ingredient_image}
                         src={ingredientInOrder.image}

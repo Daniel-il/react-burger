@@ -1,5 +1,5 @@
 import orderInfoStyles from "./order-info.module.css";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { OrderIngredient } from "../components/order-ingredient/order-ingredient";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
@@ -11,36 +11,27 @@ export function OrderInfo() {
   const background = location.state && location.state.background
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { orders } = useSelector((store) => store.ws);
-  const { ingredients } = useSelector((store) => store.ingredients);
-  const orderInModal = orders.find((order) => order._id === id);
   useEffect(() => {
     
    dispatch({type: WS_CONNECTION_START});
    return () => {
       dispatch({type: WS_CONNECTION_CLOSED});
     };
-  }, [dispatch]);
-  let countingIngredients;
-  useCallback(() => {
-    let initialCost = 0;
-    countingIngredients = orderInModal.ingredients.map((ingredient) => {
-      return ingredients.find((el) => el._id === ingredient);
-    });
-    countingIngredients.map((item) => {
-      initialCost += item.price;
-    });
-    const totalCost = initialCost;
-    setTotalPrice(totalCost);
- 
-   }, [countingIngredients])
-  
- 
-  
+  }, [dispatch])
+  const countingIngredients = [];
+  const { orders } = useSelector((store) => store.ws);
+  const { ingredients } = useSelector((store) => store.ingredients);
+  const orderInModal = orders.find((order) => order._id === id);
+  if (!orderInModal) return null
+
+  orderInModal.ingredients.map((ingredient) => {
+    const ingredientInOrder = ingredients.find((element) => element._id === ingredient);
+    countingIngredients.push(ingredientInOrder.price);
+  })
+
+  const cost = countingIngredients.reduce((acc, value) => acc + value, 0);
 
    
-   if (!orderInModal) return null
-   if (!ingredients && !orders) return null
   console.log(orderInModal)
    
  
@@ -100,7 +91,7 @@ return (
             {orderInModal.createdAt}
           </p>
           <div className={orderInfoStyles.order_price}>
-            <p className="text text_type_digits-default mr-2">{totalPrice}</p>
+            <p className="text text_type_digits-default mr-2">{cost}</p>
             <CurrencyIcon type="primary" />
           </div>
         </div>

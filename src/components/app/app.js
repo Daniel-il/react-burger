@@ -46,7 +46,7 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (getCookie('token')) {
       dispatch(getUserData());
     }
   });
