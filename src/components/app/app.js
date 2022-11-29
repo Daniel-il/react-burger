@@ -30,6 +30,8 @@ function App() {
   const { background } = location.state || { location };
   const { orders } = useSelector((store) => store.ws);
   const history = useHistory();
+  const token = getCookie('token');
+  const refreshToken = getCookie('refreshToken')
   const closeIngredientModal = useCallback(() => {
     history.replace({ pathname: "/" });
   }, [history]);
@@ -46,10 +48,15 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
   useEffect(() => {
-    if (getCookie('token')) {
-      dispatch(getUserData());
-    }
-  });
+   if (getCookie('token')) {
+    dispatch(getUserData());
+   }
+     
+    
+     
+
+    console.log(getCookie('token'))
+  }, []);
   const { ingredients } = useSelector((state) => state.ingredients);
   return (
     <>
@@ -96,7 +103,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile/orders/:id" exact={true}>
-          <OrderInfo/>
+          <OrderInfo type = 'profile' size = 'full'/>
           </ProtectedRoute>
 
           <Route path="/feed" exact={true}>
@@ -104,7 +111,7 @@ function App() {
           </Route>
 
           <Route path="/feed/:id" >
-          <OrderInfo />
+          <OrderInfo size = 'full' />
           </Route>
 
           <Route>
@@ -129,7 +136,7 @@ function App() {
             <Route path="/profile/orders/:id" exact={true}>
               
                 <Modal title="" onClose={closeProfiledModal}>
-                  <OrderInfo/>
+                  <OrderInfo type = 'profile'/>
                 </Modal>
               
             </Route>

@@ -3,7 +3,7 @@ import { checkResponse, getCookie } from "../../utils/utils";
 const POST_INGREDIENTS_SUCCESS = "POST_INGREDIENTS_SUCCESS";
 const POST_INGREDIENTS_FAILED = "POST_INGREDIENTS_FAILED";
 const POST_INGREDIENTS_REQUEST = "POST_INGREDIENTS_REQUEST";
-
+const POST_INGREDIENTS_REFRESH = "POST_INGREDIENTS_REFRESH";
 export const postIngredientsToServer = (ids) => {
   return function (dispatch) {
     dispatch({
@@ -39,4 +39,5 @@ export {
   POST_INGREDIENTS_SUCCESS,
   POST_INGREDIENTS_FAILED,
   POST_INGREDIENTS_REQUEST,
+  POST_INGREDIENTS_REFRESH
 };

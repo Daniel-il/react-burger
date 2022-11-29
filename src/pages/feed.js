@@ -12,7 +12,6 @@ import {
 export function FeedPage() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { orders, total, totalToday } = useSelector((store) => store.ws);
   useEffect(() => {
     dispatch({ type: WS_CONNECTION_START });
 
@@ -21,6 +20,9 @@ export function FeedPage() {
     };
   }, [dispatch]);
 
+  const { orders, total, totalToday } = useSelector((store) => store.ws);
+  if (!orders) return null
+  
   return (
     <section className={feedStyles.feed}>
       <div className={feedStyles.feed__wrapper}>

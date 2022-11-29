@@ -3,61 +3,81 @@ import React, { useMemo, useState, useEffect } from "react";
 import { OrderIngredient } from "../components/order-ingredient/order-ingredient";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from "../services/actions/wsActions";
+import {
+  WS_CONNECTION_START,
+  WS_CONNECTION_CLOSED,
+  wsInitWithUser,
+} from "../services/actions/wsActions";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-export function OrderInfo() {
+import { getCookie } from "../utils/utils";
+import { DateTime } from "luxon";
+export function OrderInfo({ type, size }) {
   const location = useLocation();
   const [totalPrice, setTotalPrice] = useState();
-  const background = location.state && location.state.background
+  const background = location.state && location.state.background;
   const { id } = useParams();
   const dispatch = useDispatch();
+  const token = getCookie("token");
   useEffect(() => {
-    
-   dispatch({type: WS_CONNECTION_START});
-   return () => {
-      dispatch({type: WS_CONNECTION_CLOSED});
-    };
-  }, [dispatch])
+    if (type === "profile") {
+      dispatch(
+        wsInitWithUser(`wss://norma.nomoreparties.space/orders?token=${token}`)
+      );
+      return () => {
+        dispatch({ type: WS_CONNECTION_CLOSED });
+      };
+    } else {
+      dispatch({ type: WS_CONNECTION_START });
+      return () => {
+        dispatch({ type: WS_CONNECTION_CLOSED });
+      };
+    }
+  }, [dispatch]);
   const countingIngredients = [];
   const { orders } = useSelector((store) => store.ws);
-  const { ingredients } = useSelector((store) => store.ingredients);
-  const orderInModal = orders.find((order) => order._id === id);
-  if (!orderInModal) return null
 
+  const { ingredients } = useSelector((store) => store.ingredients);
+  if (!orders) return null;
+  if (!ingredients) return null;
+  const orderInModal = orders.find((order) => order._id === id);
+  if (!orderInModal) return null;
+  const date = DateTime.fromISO(orderInModal.createdAt);
+  const dt = date.toLocaleString(DateTime.DATETIME_MED);
+  console.log(dt);
+
+  console.log(date);
   orderInModal.ingredients.map((ingredient) => {
-    const ingredientInOrder = ingredients.find((element) => element._id === ingredient);
+    const ingredientInOrder = ingredients.find(
+      (element) => element._id === ingredient
+    );
     countingIngredients.push(ingredientInOrder.price);
-  })
+  });
 
   const cost = countingIngredients.reduce((acc, value) => acc + value, 0);
 
-   
-  console.log(orderInModal)
-   
- 
-  
-  const countItems = {};
-{
+  console.log(orderInModal);
 
-  orderInModal.ingredients.map((ingredient) => {
-  if (!countItems[ingredient]) {
-    countItems[ingredient] = 1;
-  } else {
-    countItems[ingredient] += 1;
+  const countItems = {};
+  {
+    orderInModal.ingredients.map((ingredient) => {
+      if (!countItems[ingredient]) {
+        countItems[ingredient] = 1;
+      } else {
+        countItems[ingredient] += 1;
+      }
+    });
   }
-});
-}
-  
+
   const uniqueItems = Object.entries(countItems);
-  
-  
-    
-  
-return (
+
+  return (
     <div className={orderInfoStyles.orderInfo}>
       <div className={orderInfoStyles.orderInfo__card}>
         <p
-          className={`${orderInfoStyles.orderInfo__id} text text_type_digits-default mb-10`}
+          className={size === 'full' ?`${orderInfoStyles.orderInfo__id} text text_type_digits-default mb-8`  :
+          
+          `${orderInfoStyles.orderInfo__id_small} text text_type_digits-default mb-8`
+          }
         >
           #{orderInModal.number}
         </p>
@@ -88,7 +108,7 @@ return (
           <p
             className={`${orderInfoStyles.timestamp} text text_type_main-default text_color_inactive`}
           >
-            {orderInModal.createdAt}
+            {dt}
           </p>
           <div className={orderInfoStyles.order_price}>
             <p className="text text_type_digits-default mr-2">{cost}</p>

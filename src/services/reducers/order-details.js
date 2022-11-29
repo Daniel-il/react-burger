@@ -1,7 +1,7 @@
-import { POST_INGREDIENTS_REQUEST, POST_INGREDIENTS_SUCCESS, POST_INGREDIENTS_FAILED } from "../actions/order-details";
+import { POST_INGREDIENTS_REQUEST, POST_INGREDIENTS_SUCCESS, POST_INGREDIENTS_FAILED, POST_INGREDIENTS_REFRESH } from "../actions/order-details";
 
 const orderInitialState = {
-    orderNumber: 0,
+    orderNumber: null,
     orderRequest: false,
     orderFailed: false,
 }
@@ -28,6 +28,14 @@ export const orderReducer = (state = orderInitialState, action) => {
                 orderRequest: false,
                 orderFailed: true,
                 orderNumber: 0,
+            }
+        }
+        case POST_INGREDIENTS_REFRESH: {
+            return {
+                ...state,
+                orderRequest: false,
+                orderFailed: false,
+                orderNumber: null
             }
         }
         default: {

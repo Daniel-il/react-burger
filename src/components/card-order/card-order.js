@@ -3,6 +3,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { nanoid } from "nanoid";
 import React, { useState, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
+import {DateTime} from 'luxon'
 export function CardOrder({ id, ingredientsList, date, name }) {
   const { ingredients } = useSelector((store) => store.ingredients);
   let countingIngredients
@@ -21,15 +22,16 @@ export function CardOrder({ id, ingredientsList, date, name }) {
       setTotalPrice(totalCost);
     
   }, [countingIngredients]);
-  
+  const newDate = DateTime.fromISO(date)
+  const dt = newDate.toLocaleString(DateTime.DATETIME_MED)
   return (
     <li className={cardStyles.order}>
       <div className={cardStyles.order_id}>
         <p className={`${cardStyles.id} text text_type_main-default`}>#{id}</p>
         <p
-          className={`${cardStyles.timestamp} text text_type_main-default text_color_inactive`}
+          className={`${cardStyles.timestamp} text text_type_main-default text_color_inactive pr-4`}
         >
-          {date}
+          {dt}
         </p>
       </div>
       <div className={cardStyles.order_info}>
@@ -49,7 +51,7 @@ export function CardOrder({ id, ingredientsList, date, name }) {
                 );
                 return (
                  
-                  <li className={cardStyles.ingredient} key={nanoid()}>
+                  <li className={cardStyles.ingredient} key={ingredientInOrder._id}>
                     <img
                       className={cardStyles.ingredient_image}
                       src={ingredientInOrder.image}
@@ -66,7 +68,7 @@ export function CardOrder({ id, ingredientsList, date, name }) {
                   (el) => el._id === ingredient
                 );
                 return (
-                    <li className={cardStyles.ingredient} key={nanoid()}>
+                    <li className={cardStyles.ingredient} key={ingredientInOrder._id}>
                       <img
                         className={cardStyles.ingredient_image}
                         src={ingredientInOrder.image}
