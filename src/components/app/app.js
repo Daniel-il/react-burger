@@ -20,7 +20,7 @@ import { IngredientPage } from "../../pages/ingredient";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Page404 } from "../../pages/404";
 import { Modal } from "../modal/modal";
-import { getCookie } from "../../utils/utils";
+import { deleteCookie, getCookie } from "../../utils/utils";
 import { FeedPage } from "../../pages/feed";
 import { OrdersPage } from "../../pages/orders";
 import { OrderInfo } from "../../pages/order-info";
@@ -133,13 +133,13 @@ function App() {
               </Modal>
             </Route>
 
-            <Route path="/profile/orders/:id" exact={true}>
+            <ProtectedRoute path="/profile/orders/:id" exact={true}>
               
                 <Modal title="" onClose={closeProfiledModal}>
                   <OrderInfo type = 'profile'/>
                 </Modal>
               
-            </Route>
+            </ProtectedRoute>
           </>
         )}
       </Main>
