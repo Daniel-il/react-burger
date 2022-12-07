@@ -10,7 +10,7 @@ export function ProtectedRoute({ children, ...rest }) {
       return null
     }
 
-    return (
+    return (  
       <Route
         {...rest}
         render={({ location }) =>

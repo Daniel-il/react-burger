@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { addConstructorIngredient } from "../../services/actions/burger-constructor";
 import ConstructorFilling from "../constructor-filling/constructor-filling";
-import { postIngredientsToServer } from "../../services/actions/order-details";
+import { postIngredientsToServer, POST_INGREDIENTS_REFRESH } from "../../services/actions/order-details";
 import { useHistory } from "react-router-dom";
 
 export default function BurgerConstructor() {
@@ -61,6 +61,7 @@ export default function BurgerConstructor() {
 
   const closeOrderModal = () => {
     setIsOrderDetailsOpened(false);
+    dispatch({type: POST_INGREDIENTS_REFRESH})
   };
 
   return (

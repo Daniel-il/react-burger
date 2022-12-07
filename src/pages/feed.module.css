@@ -1,0 +1,40 @@
+.feed {
+  display: flex;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+ 
+}
+.feed__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px;
+  max-width: 584px;
+  width: 100%;
+}
+.title {
+  display: flex;
+}
+.orders {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 608px;
+  padding: 0;
+  height: 768px;
+  overflow-y: scroll;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}
+.orders::-webkit-scrollbar {
+  width: 8px;
+}
+.orders::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.orders::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}

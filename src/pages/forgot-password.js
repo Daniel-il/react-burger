@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { recoverPassword } from "../../services/actions/password-recover";
+import { recoverPassword } from "../services/actions/password-recover";
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const [emailValue, setEmailValue] = useState("");

@@ -25,7 +25,6 @@ function OrderDetails(props) {
 
 OrderDetails.propTypes = {
     onClick: PropTypes.func.isRequired,
-    orderNumber: PropTypes.number.isRequired,
 }
 
 export { OrderDetails };

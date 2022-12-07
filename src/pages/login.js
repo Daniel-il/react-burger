@@ -7,7 +7,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect } from "react-router-dom";
-import { login } from "../../services/actions/login";
+import { login } from "../services/actions/login";
 
 export function LoginPage() {
   const dispatch = useDispatch();

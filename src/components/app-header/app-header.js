@@ -29,13 +29,16 @@ export default function AppHeader() {
           </div>
           <div className={headerStyles.header__item}>
             <ListIcon type="secondary" />
-            <a
-              href="#"
-              style={{ textDecoration: "none" }}
-              className="text text_type_main-default text_color_inactive ml-2"
+            <Link
+              className={
+                pathname === "/feed"
+                  ? `${headerStyles.header__link_active} text text_type_main-default  ml-2`
+                  : `${headerStyles.header__link} text text_type_main-default text_color_inactive ml-2`
+              }
+              to="/feed"
             >
               Лента заказов
-            </a>
+            </Link>
           </div>
         </nav>
         <Logo />
@@ -44,7 +47,7 @@ export default function AppHeader() {
           <Link
             to={isAuth ? "/profile" : "/login"}
             className={
-              pathname === "/profile"
+              pathname === "/profile" || pathname === '/login'
                 ? `${headerStyles.header__link_active} text text_type_main-default  ml-2`
                 : `${headerStyles.header__link} text text_type_main-default text_color_inactive ml-2`
             }

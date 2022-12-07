@@ -1,0 +1,49 @@
+.orderInfo {
+    margin: 0 auto;
+    max-width: 640px;
+    width: 100%;
+}
+.orderInfo__card {
+    display: flex;
+    flex-direction: column;
+}
+.orderInfo__id {
+    text-align: center;
+    margin-top: 20px;
+
+}
+.orderInfo__id_small {
+    text-align: start;
+
+}
+.orderInfo__status { 
+    color: #00CCCC;
+}
+.orderInfo__list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 260px;
+    overflow-y: scroll;
+}
+.orderInfo__info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    max-width: 584px;
+    padding-bottom: 20px;
+}
+.order_price {
+    display: flex
+}
+.orderInfo__list::-webkit-scrollbar {
+    width: 8px;
+  }
+  .orderInfo__list::-webkit-scrollbar-track {
+    background: #2f2f37;
+  }
+  .orderInfo__list::-webkit-scrollbar-thumb {
+    background: #8585ad;
+  }

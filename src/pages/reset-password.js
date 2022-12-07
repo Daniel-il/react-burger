@@ -6,7 +6,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation, Redirect } from "react-router-dom";
-import { resetPassword } from "../../services/actions/password-reset";
+import { resetPassword } from "../services/actions/password-reset";
 import { useDispatch } from "react-redux";
 
 export function ResetPasswordPage() {

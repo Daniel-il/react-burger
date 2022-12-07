@@ -1,10 +1,9 @@
 import { baseUrl } from "../../utils/constants";
-import { checkResponse } from "../../utils/utils";
-
+import { checkResponse, getCookie } from "../../utils/utils";
 const POST_INGREDIENTS_SUCCESS = "POST_INGREDIENTS_SUCCESS";
 const POST_INGREDIENTS_FAILED = "POST_INGREDIENTS_FAILED";
 const POST_INGREDIENTS_REQUEST = "POST_INGREDIENTS_REQUEST";
-
+const POST_INGREDIENTS_REFRESH = "POST_INGREDIENTS_REFRESH";
 export const postIngredientsToServer = (ids) => {
   return function (dispatch) {
     dispatch({
@@ -14,6 +13,7 @@ export const postIngredientsToServer = (ids) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: 'Bearer ' + getCookie('token')
       },
       body: JSON.stringify({
         ingredients: ids,
@@ -39,4 +39,5 @@ export {
   POST_INGREDIENTS_SUCCESS,
   POST_INGREDIENTS_FAILED,
   POST_INGREDIENTS_REQUEST,
+  POST_INGREDIENTS_REFRESH
 };
