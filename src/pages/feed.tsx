@@ -8,7 +8,6 @@ import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSED,
 } from "../services/actions/wsActions";
-import { RootState } from "../services/types";
 import { TOrderItem } from "../services/types/utils";
 export function FeedPage() {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ export function FeedPage() {
   }, [dispatch]);
 
   const { orders, total, totalToday } = useSelector(
-    (store: RootState) => store.ws
+    (store) => store.ws
   );
   if (!orders) return null;
 
@@ -36,7 +35,7 @@ export function FeedPage() {
         </h1>
         <ul className={feedStyles.orders}>
           {orders &&
-            orders.map((order: TOrderItem) => {
+            orders.map((order) => {
               return (
                 <Link
                   className={feedStyles.link}

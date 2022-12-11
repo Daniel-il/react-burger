@@ -1,6 +1,6 @@
 import loginStyles from "./login.module.css";
 import { useDispatch, useSelector } from "../services/types/hooks";
-import { useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 import {
   Input,
   PasswordInput,
@@ -14,7 +14,7 @@ export function LoginPage() {
   const { isAuth } = useSelector((store) => store.auth);
   const [usernameValue, setUsernameValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
-  const loginIntoAccount = (e: any) => {
+  const loginIntoAccount = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(login(usernameValue, passwordValue));
   };
@@ -34,13 +34,13 @@ export function LoginPage() {
             <Input
               type="email"
               placeholder="E-mail"
-              onChange={(e) => setUsernameValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setUsernameValue(e.target.value)}
               value={usernameValue}
               size="default"
             />
             <PasswordInput
               name="password"
-              onChange={(e) => setPasswordValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value)}
               value={passwordValue}
               size="default"
             />

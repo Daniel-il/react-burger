@@ -1,18 +1,13 @@
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import { ReactNode } from "react";
 import { useSelector } from "../../services/types/hooks";
 import { FC } from "../../services/types/utils";
-import { RootState } from "../../services/types";
-type TProtectedRouteProps = {
-  children: ReactNode;
-  path: string;
-  exact?: boolean;
-};
-export const ProtectedRoute: FC<TProtectedRouteProps> = ({
+
+export const ProtectedRoute: FC<RouteProps & {children?: ReactNode}> = ({
   children,
   ...rest
 }) => {
-  const { user, isAuth } = useSelector((store: RootState) => store.auth);
+  const { user, isAuth } = useSelector((store) => store.auth);
 
   if (!isAuth) {
     return null;

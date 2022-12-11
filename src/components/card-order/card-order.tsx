@@ -25,7 +25,7 @@ export const CardOrder: FC<TCardOrderProps> = ({
   useEffect(() => {
     let initialCost = 0;
     countingIngredients = ingredientsList.map((ingredient) => {
-      return ingredients.find((el: TIngredientItem) => el._id === ingredient);
+      return ingredients.find((el) => el._id === ingredient);
     });
     countingIngredients.map((item: any) => {
       initialCost += item.price;
@@ -58,7 +58,7 @@ export const CardOrder: FC<TCardOrderProps> = ({
               const uniqueItems = Array.from(new Set(ingredientsArr));
               return uniqueItems.map((ingredient) => {
                 const ingredientInOrder = ingredients.find(
-                  (el: TIngredientItem) => el._id === ingredient
+                  (el) => el._id === ingredient
                 )!;
                 return (
                   <li
@@ -77,7 +77,7 @@ export const CardOrder: FC<TCardOrderProps> = ({
               const uniqueItems = Array.from(new Set(ingredientsList));
               return uniqueItems.map((ingredient) => {
                 const ingredientInOrder = ingredients.find(
-                  (el: TIngredientItem) => el._id === ingredient
+                  (el) => el._id === ingredient
                 )!;
                 return (
                   <li

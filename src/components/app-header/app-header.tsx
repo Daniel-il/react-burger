@@ -5,11 +5,10 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types/hooks";
 import { Link, useLocation } from "react-router-dom";
-import { RootState } from "../../services/types";
 export default function AppHeader() {
-  const { isAuth } = useSelector((store: RootState) => store.auth);
+  const { isAuth } = useSelector(store => store.auth);
   const { pathname } = useLocation();
   return (
     <header className={headerStyles.header}>

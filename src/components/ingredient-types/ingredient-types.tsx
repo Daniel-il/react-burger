@@ -3,7 +3,6 @@ import ingredientTypesStyles from "./ingredient-types.module.css";
 import PropTypes from "prop-types";
 import { DraggableFilling } from "../draggable-filling/draggable-filling";
 import { FC, TIngredientItem } from "../../services/types/utils";
-import { RootState } from "../../services/types";
 import { useSelector } from "../../services/types/hooks";
 
 type TIngredientsTypesProps = {
@@ -35,7 +34,7 @@ export const IngredientTypes: FC<TIngredientsTypesProps> = ({
       amount[bun._id] = 2;
     }
     if (filling) {
-      filling.map((item: TIngredientItem) => {
+      filling.map((item) => {
         if (amount[item._id] === undefined) {
           amount[item._id] = 0;
         }
@@ -48,7 +47,7 @@ export const IngredientTypes: FC<TIngredientsTypesProps> = ({
   const allAmount = startCount();
   return (
     <ul className={ingredientTypesStyles.list} ref={ingredientsRef}>
-      {ingredientsArray.map((ingredient: TIngredientItem) => {
+      {ingredientsArray.map((ingredient) => {
         return (
           <React.Fragment key={ingredient._id}>
             <DraggableFilling

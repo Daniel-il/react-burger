@@ -1,5 +1,5 @@
 import profileStyles from "./profile.module.css";
-import { useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import {
   PasswordInput,
   Input,
@@ -33,7 +33,7 @@ export function ProfilePage() {
               type="text"
               icon="EditIcon"
               placeholder="Имя"
-              onChange={(e) => setUsernameValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setUsernameValue(e.target.value)}
               value={usernameValue}
               size="default"
             />
@@ -41,13 +41,13 @@ export function ProfilePage() {
               type="email"
               icon="EditIcon"
               placeholder="Логин"
-              onChange={(e) => setEmailValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
               value={emailValue}
               size="default"
             />
             <PasswordInput
               name="mt-6"
-              onChange={(e) => setPasswordValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value)}
               value={passwordValue}
               size="default"
             />
@@ -57,7 +57,7 @@ export function ProfilePage() {
           <Button
             type="secondary"
             size="medium"
-            onClick={(e) => {
+            onClick={(e: SyntheticEvent) => {
               e.preventDefault();
               if (user) {
                 setEmailValue(user.email);
@@ -71,7 +71,7 @@ export function ProfilePage() {
           <Button
             type="primary"
             size="medium"
-            onClick={(e) => {
+            onClick={(e: SyntheticEvent) => {
               e.preventDefault();
               dispatch(
                 changeUserData(emailValue, usernameValue, passwordValue)

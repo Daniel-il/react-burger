@@ -12,7 +12,6 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { getCookie } from "../utils/utils";
 import { DateTime } from "luxon";
 import { FC, TIngredientItem, TOrderItem } from "../services/types/utils";
-import { RootState } from "../services/types";
 
 type TOrderInfoProps = {
   type: string;
@@ -41,9 +40,9 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
   }, [dispatch]);
 
   const countingIngredients: Array<number> = [];
-  const { orders } = useSelector((store: RootState) => store.ws);
+  const { orders } = useSelector((store) => store.ws);
 
-  const { ingredients } = useSelector((store: RootState) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
   if (!orders) return null;
   if (!ingredients) return null;
   const orderInModal: TOrderItem | undefined = orders.find(
@@ -56,7 +55,7 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
   console.log(dt);
 
   console.log(date);
-  orderInModal.ingredients.map((ingredient: string) => {
+  orderInModal.ingredients.map((ingredient) => {
     const ingredientInOrder = ingredients.find(
       (element: TIngredientItem) => element._id === ingredient
     )!;
@@ -75,7 +74,7 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
   } = {};
 
   {
-    orderInModal.ingredients.map((ingredient: string) => {
+    orderInModal.ingredients.map((ingredient) => {
       if (!countItems[ingredient]) {
         countItems[ingredient] = 1;
       } else {
@@ -108,7 +107,7 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
         <ul className={orderInfoStyles.orderInfo__list}>
           {uniqueItems.map((ingredient) => {
             const ingredientInOrder = ingredients.find(
-              (el: TIngredientItem) => el._id === ingredient[0]
+              (el) => el._id === ingredient[0]
             )!;
             return (
               <OrderIngredient

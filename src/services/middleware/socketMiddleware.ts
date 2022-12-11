@@ -1,13 +1,12 @@
-import { store } from "../..";
+import { Middleware, MiddlewareAPI } from "redux";
 import { IWsActions } from "../actions/wsActions";
-import { AppThunk } from "../types";
-import { TOrderItem } from "../types/utils";
+import { AppDispatch, RootState } from "../types";
 
-export const socketMiddleware = (wsUrl: string, wsActions: IWsActions) => {
-  return (store: { dispatch: any }) => {
+export const socketMiddleware = (wsUrl: string, wsActions: IWsActions): Middleware<{}, RootState> => {
+  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
-    return (next: (arg0: any) => void) =>
-      (action: { type: any; payload: any }) => {
+    return (next) =>
+      (action) => {
         const { dispatch } = store;
         const { type, payload } = action;
         const { wsInit, wsInitWithUser, onOpen, onClose, onError, onMessage } =
@@ -19,11 +18,11 @@ export const socketMiddleware = (wsUrl: string, wsActions: IWsActions) => {
           socket = new WebSocket(payload);
         }
         if (socket) {
-          socket.onopen = (event: any) => {
+          socket.onopen = (event: Event) => {
             dispatch({ type: onOpen, payload: event });
           };
 
-          socket.onerror = (event: any) => {
+          socket.onerror = (event: Event) => {
             dispatch({ type: onError, payload: event });
           };
 
@@ -35,7 +34,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: IWsActions) => {
             dispatch({ type: onMessage, payload: restParsedData });
           };
 
-          socket.onclose = (event: any) => {
+          socket.onclose = (event: CloseEvent) => {
             dispatch({ type: onClose, payload: event });
           };
         }

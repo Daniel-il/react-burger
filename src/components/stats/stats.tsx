@@ -19,7 +19,7 @@ export const Stats: FC<TStateProps> = ({
         <div className={statsStyles.done}>
           <p className="text text_type_main-medium mb-6">Готовы:</p>
           <ul className={statsStyles.done__list}>
-            {orders.map((order: TOrderItem) => {
+            {orders.map((order) => {
               return (
                 <React.Fragment key={order._id}>
                   <li className={statsStyles.done__item}>
@@ -39,7 +39,7 @@ export const Stats: FC<TStateProps> = ({
         <div className={statsStyles.done}>
           <p className="text text_type_main-medium mb-6">В работе:</p>
           <ul className={statsStyles.inWork__list}>
-            {orders.map((order: TOrderItem) => {
+            {orders.map((order) => {
               <React.Fragment key={order._id}>
                 <li className={statsStyles.done__item}>
                   {order.status !== "done" && (

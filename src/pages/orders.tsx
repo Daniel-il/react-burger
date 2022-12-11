@@ -9,7 +9,6 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { getCookie } from "../utils/utils";
 import { useDispatch, useSelector } from "../services/types/hooks";
-import { RootState } from "../services/types";
 import { TOrderItem } from "../services/types/utils";
 export function OrdersPage() {
   const token = getCookie("token");
@@ -23,7 +22,7 @@ export function OrdersPage() {
     };
   }, [dispatch, token]);
   const location = useLocation();
-  const { orders } = useSelector((store: RootState) => store.ws);
+  const { orders } = useSelector((store) => store.ws);
 
   return (
     <section className={ordersStyles.orders}>
@@ -31,7 +30,7 @@ export function OrdersPage() {
       <div className={ordersStyles.ordersboard}>
         <ul className={ordersStyles.orders__list}>
           {orders &&
-            orders.map((order: TOrderItem) => {
+            orders.map((order) => {
               return (
                 <React.Fragment key={order._id}>
                   <Link

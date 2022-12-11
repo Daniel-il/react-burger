@@ -16,14 +16,13 @@ import {
   POST_INGREDIENTS_REFRESH,
 } from "../../services/actions/order-details";
 import { useHistory } from "react-router-dom";
-import { RootState } from "../../services/types";
 import { TIngredientItem } from "../../services/types/utils";
 import { useDispatch, useSelector } from "../../services/types/hooks";
 export default function BurgerConstructor() {
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] =
     React.useState<boolean>(false);
-  const { orderNumber } = useSelector((store: RootState) => store.orderDetails);
-  const { isAuth } = useSelector((store: RootState) => store.auth);
+  const { orderNumber } = useSelector((store) => store.orderDetails);
+  const { isAuth } = useSelector((store) => store.auth);
   const { bun, filling } = useSelector(
     (store) =>
       store.burgerConstructorIngredients.constructorIngredients
@@ -41,7 +40,7 @@ export default function BurgerConstructor() {
     let ingredientsIds: Array<string>;
     if (bun && filling) {
       ingredientsIds = filling.map(
-        (ingredient: TIngredientItem) => ingredient._id
+        (ingredient) => ingredient._id
       );
   
       const bunId = bun._id;
@@ -59,7 +58,7 @@ export default function BurgerConstructor() {
     let initialCost = 0;
     if (bun && filling) {
       const bunCost = bun.price * 2;
-      filling.map((item: TIngredientItem) => (initialCost += item.price));
+      filling.map((item) => (initialCost += item.price));
       const totalCost = bunCost + initialCost;
       setTotalPrice(totalCost);
     }
@@ -98,7 +97,7 @@ export default function BurgerConstructor() {
             </p>
           )}
           {filling &&
-            filling.map((ingredient: TIngredientItem, i: number) => (
+            filling.map((ingredient, i) => (
               <ConstructorFilling
                 ingredient={ingredient}
                 key={ingredient.nanoId}
