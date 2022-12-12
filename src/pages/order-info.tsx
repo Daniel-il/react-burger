@@ -46,7 +46,7 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
   if (!orders) return null;
   if (!ingredients) return null;
   const orderInModal: TOrderItem | undefined = orders.find(
-    (order: TOrderItem) => order._id === id
+    (order) => order._id === id
   );
   if (!orderInModal) return null;
 
@@ -57,13 +57,13 @@ export const OrderInfo: FC<TOrderInfoProps> = ({ type, size }) => {
   console.log(date);
   orderInModal.ingredients.map((ingredient) => {
     const ingredientInOrder = ingredients.find(
-      (element: TIngredientItem) => element._id === ingredient
+      (element) => element._id === ingredient
     )!;
     countingIngredients.push(ingredientInOrder.price);
   });
 
   const cost = countingIngredients.reduce(
-    (acc: number, value: number) => acc + value,
+    (acc, value) => acc + value,
     0
   );
 

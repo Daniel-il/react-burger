@@ -22,7 +22,7 @@ export const IngredientTypes: FC<TIngredientsTypesProps> = ({
   );
 
   const ingredientsArray = ingredients.filter(
-    (ingredient: TIngredientItem) => ingredient.type === type
+    (ingredient) => ingredient.type === type
   );
 
   function startCount() {

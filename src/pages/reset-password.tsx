@@ -1,5 +1,5 @@
 import resetStyles from "./reset-password.module.css";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   PasswordInput,
   Input,
@@ -28,7 +28,7 @@ export function ResetPasswordPage() {
       <div className={resetStyles.wrapper}>
         <form
           className={resetStyles.form}
-          onSubmit={(e) => {
+          onSubmit={(e: FormEvent) => {
             e.preventDefault();
             dispatch(resetPassword(emailTokenValue, passwordValue));
           }}
@@ -36,14 +36,14 @@ export function ResetPasswordPage() {
           <fieldset className={resetStyles.fieldset}>
             <PasswordInput
               name="password"
-              onChange={(e) => setEmailTokenValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailTokenValue(e.target.value)}
               value={emailTokenValue}
             />
             <Input
               type="text"
               placeholder="Введите код из письма"
               name=""
-              onChange={(e) => setPasswordValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value)}
               value={passwordValue}
             />
           </fieldset>

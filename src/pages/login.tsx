@@ -1,6 +1,6 @@
 import loginStyles from "./login.module.css";
 import { useDispatch, useSelector } from "../services/types/hooks";
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { ChangeEvent, FormEvent, SyntheticEvent, useState } from "react";
 import {
   Input,
   PasswordInput,
@@ -14,7 +14,7 @@ export function LoginPage() {
   const { isAuth } = useSelector((store) => store.auth);
   const [usernameValue, setUsernameValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
-  const loginIntoAccount = (e: SyntheticEvent) => {
+  const loginIntoAccount = (e: FormEvent) => {
     e.preventDefault();
     dispatch(login(usernameValue, passwordValue));
   };

@@ -1,5 +1,5 @@
 import forgotStyles from "./forgot-password.module.css";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   Input,
   Button,
@@ -21,7 +21,7 @@ export function ForgotPasswordPage() {
       <div className={forgotStyles.wrapper}>
         <form
           className={forgotStyles.form}
-          onSubmit={(e) => {
+          onSubmit={(e: FormEvent) => {
             e.preventDefault();
             dispatch(recoverPassword(emailValue));
             history.replace({
@@ -34,7 +34,7 @@ export function ForgotPasswordPage() {
             <Input
               type="email"
               placeholder="E-mail"
-              onChange={(e) => setEmailValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
               value={emailValue}
               size="default"
             />

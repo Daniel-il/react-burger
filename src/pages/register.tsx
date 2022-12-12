@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {  useState } from "react";
+import {  FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { register } from "../services/actions/register";
 import { useDispatch } from "../services/types/hooks";
@@ -13,7 +13,7 @@ export function RegisterPage() {
   const [emailValue, setEmailValue] = useState<string>("");
   const [passwordValue, setPasswordValue] = useState<string>("");
   const [usernameValue, setUsernameValue] = useState<string>("");
-  const registerUser = (e: any) => {
+  const registerUser = (e: FormEvent)=> {
     e.preventDefault();
     dispatch(register(emailValue, passwordValue, usernameValue));
   };
