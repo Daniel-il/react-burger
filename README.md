@@ -5,5 +5,6 @@
 ## Ссылка на проект: https://cosmo-burger.surge.sh/
 
 ### Запуск проекта локально:
-npm  i --force \
+npm  i --force 
+
 npm run start - для запуска проекта в режиме разработчика.
